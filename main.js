@@ -2,6 +2,7 @@ import Project from "./modules/project";
 import DisplayController from "./modules/DisplayController";
 
 const addProjectButton = document.querySelector(".add-project-button");
+const addTodoButton = document.querySelector(".add-todo-button");
 
 const app = (function () {
   const _projectList = [];
@@ -82,6 +83,15 @@ projectListContainer.addEventListener("click", (e) => {
       app.getCurrentProject()
     );
   }
+});
+
+addTodoButton.addEventListener("click", () => {
+  const currentProject = app.getCurrentProject();
+  currentProject.addTodo("titulo", "descripcion");
+  DisplayController.updateDisplay(
+    app.getProjectList(),
+    app.getCurrentProject()
+  );
 });
 
 // TODO Organizar mejor

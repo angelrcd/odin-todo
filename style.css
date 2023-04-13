@@ -29,6 +29,50 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+header {
+  padding: 0.2rem 3rem;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  background: #333333;
+  color: white;
+}
+
+header img{
+  height: 4rem;
+}
+
+#app {
+  display: flex;
+  gap: 1rem;
+}
+
+#projects-list {
+  background-color: #87cefa;
+  min-height: 100vh;
+  padding: 2rem;
+  width: 300px;
+}
+
+#projects-list ul {
+  padding: 0;
+  list-style: none;
+}
+
+#projects-list ul li {
+  padding: 0.2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#projects-list ul li:hover:not(.current-project) {
+  background: #71afd6;
+}
+
+#current-project {
+  padding: 2rem;
+}
+
 .current-project {
-  color: red;
+  background: #58ade2;
 }

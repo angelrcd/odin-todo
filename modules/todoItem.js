@@ -1,20 +1,28 @@
 export default class TodoItem {
   constructor(title, description) {
-    this.title = title;
-    this.description = description;
+    this._title = title;
+    this._description = description;
     this.isComplete = false;
     this.creationDate = new Date();
     this.lastEditDate = null;
   }
 
+  get title() {
+    return this._title;
+  }
+
   set title(newTitle) {
     if (newTitle.length === 0) return;
-    this.title = newTitle;
+    this._title = newTitle;
+  }
+
+  get description() {
+    return this._description;
   }
 
   set description(newDescription) {
     if (newDescription.length === 0) return;
-    this.description = newDescription;
+    this._description = newDescription;
   }
 
   editTodo(newTitle, newDescription) {

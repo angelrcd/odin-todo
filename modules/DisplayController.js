@@ -12,7 +12,7 @@ export default class DisplayController {
       const listItem = document.createElement("li");
       listItem.classList.add("project-container");
       listItem.setAttribute("data-index", index);
-      listItem.textContent = project.projectName;
+      listItem.textContent = `${project.projectName} (${project.todoList.length})`;
       if (project === currentProject) {
         listItem.classList.add("current-project");
       }
@@ -31,12 +31,19 @@ export default class DisplayController {
 
   static #updateTodoList(currentProject) {
     const currentProjectTitle = document.querySelector("#current-project h2");
+    const todoListElement = document.querySelector("#current-project ul");
+
+    todoListElement.innerHTML = "";
+
     currentProjectTitle.textContent = currentProject.projectName;
     const listOfTodos = currentProject.todoList;
-    console.log(listOfTodos.length);
 
     listOfTodos.forEach((todo) => {
-      console.log(todo.title);
+      const listItem = document.createElement("li");
+      listItem.classList.add("todo-container");
+      listItem.textContent = `${todo.title} - ${todo.description}`;
+
+      todoListElement.appendChild(listItem);
     });
   }
 }
