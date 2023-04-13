@@ -1,5 +1,5 @@
 import Project from "./modules/project";
-import updateProjectListDisplay from "./modules/mediator";
+import DisplayController from "./modules/DisplayController";
 
 const addProjectButton = document.querySelector(".add-project-button");
 
@@ -18,10 +18,10 @@ const app = (function () {
 
   const deleteProject = (projectIndex) => {
     // Must not delete default project
-    if (projectIndex == 0) return;
+    if (projectIndex === 0) return;
     // Deleting same project as current project should move current project -1
     if (_projectList[projectIndex] === _currentProject) {
-      this.setCurrentProject(projectIndex - 1);
+      setCurrentProject(projectIndex - 1);
     }
 
     _projectList.splice(projectIndex, 1);
@@ -38,7 +38,7 @@ const app = (function () {
   const init = () => {
     addProject("default");
     setCurrentProject(0);
-    updateProjectListDisplay(undefined, app.getProjectList());
+    DisplayController.updateDisplay(_projectList, _currentProject);
   };
 
   return {
@@ -54,20 +54,32 @@ const app = (function () {
 app.init();
 
 addProjectButton.addEventListener("click", () => {
-  updateProjectListDisplay(
-    () => app.addProject("project" + app.getProjectList().length),
-    app.getProjectList()
+  app.addProject("project" + app.getProjectList().length);
+  DisplayController.updateDisplay(
+    app.getProjectList(),
+    app.getCurrentProject()
   );
 });
 
-document.addEventListener("click", (e) => {
+// Events listeners for changing current project and deleting them
+const projectListContainer = document.querySelector("#projects-list");
+projectListContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-project")) {
     const deleteButton = e.target;
-    const projectIndex = deleteButton.getAttribute("data-index");
+    const projectIndex = +deleteButton.getAttribute("data-index");
+    app.deleteProject(projectIndex);
 
-    updateProjectListDisplay(
-      () => app.deleteProject(projectIndex),
-      app.getProjectList()
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
+    );
+  } else if (e.target.classList.contains("project-container")) {
+    const projectIndex = +e.target.getAttribute("data-index");
+    app.setCurrentProject(projectIndex);
+
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
     );
   }
 });
