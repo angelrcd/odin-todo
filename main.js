@@ -1,8 +1,14 @@
 import Project from "./modules/project";
 import DisplayController from "./modules/DisplayController";
+import { NewProjectFormController } from "./modules/formsController";
 
 const addProjectButton = document.querySelector(".add-project-button");
 const addTodoButton = document.querySelector(".add-todo-button");
+const showNewProjectFormButton = document.querySelector(
+  ".show-new-project-form"
+);
+const newProjectNameInput = document.querySelector(".new-project-form input");
+const cancelNewProjectButton = document.querySelector(".cancel-new-project");
 
 const app = (function () {
   const _projectList = [];
@@ -13,8 +19,11 @@ const app = (function () {
   };
 
   const addProject = (projectName) => {
+    if (projectName === "") return false;
+
     const newPoject = new Project(projectName);
     _projectList.push(newPoject);
+    return true;
   };
 
   const deleteProject = (projectIndex) => {
@@ -55,12 +64,50 @@ const app = (function () {
 app.init();
 
 addProjectButton.addEventListener("click", () => {
-  app.addProject("project" + app.getProjectList().length);
+  const newProjectName = NewProjectFormController.getInputValue();
+  app.addProject(newProjectName);
+
+  NewProjectFormController.clearInput();
+  NewProjectFormController.toggleForm();
+
+  // set current project at the newly created
+  app.setCurrentProject(app.getProjectList().length - 1);
+
   DisplayController.updateDisplay(
     app.getProjectList(),
     app.getCurrentProject()
   );
 });
+
+newProjectNameInput.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") NewProjectFormController.toggleForm();
+  if (e.key !== "Enter") return;
+
+  const newProjectName = NewProjectFormController.getInputValue();
+  const isProjectAdded = app.addProject(newProjectName);
+
+  NewProjectFormController.clearInput();
+  NewProjectFormController.toggleForm();
+
+  // set current project at the newly created
+  if (isProjectAdded) {
+    app.setCurrentProject(app.getProjectList().length - 1);
+  }
+
+  DisplayController.updateDisplay(
+    app.getProjectList(),
+    app.getCurrentProject()
+  );
+});
+
+showNewProjectFormButton.addEventListener("click", () => {
+  NewProjectFormController.toggleForm();
+  newProjectNameInput.focus();
+});
+cancelNewProjectButton.addEventListener(
+  "click",
+  NewProjectFormController.toggleForm
+);
 
 // Events listeners for changing current project and deleting them
 const projectListContainer = document.querySelector("#projects-list");
@@ -93,6 +140,3 @@ addTodoButton.addEventListener("click", () => {
     app.getCurrentProject()
   );
 });
-
-// TODO Organizar mejor
-console.log(app.getCurrentProject());

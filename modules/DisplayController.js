@@ -20,7 +20,6 @@ export default class DisplayController {
       if (index != 0) {
         const deleteProjectButton = document.createElement("button");
         deleteProjectButton.classList.add("delete-project");
-        deleteProjectButton.textContent = "-";
         deleteProjectButton.setAttribute("data-index", index);
         listItem.insertAdjacentElement("beforeend", deleteProjectButton);
       }
