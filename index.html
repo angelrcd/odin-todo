@@ -28,7 +28,19 @@
       <div id="current-project">
         <h2></h2>
         <ul></ul>
-        <button class="add-todo-button">+</button>
+        <button class="show-new-todo-form"></button>
+        <div class="new-todo-form hidden">
+          <form action="">
+            <label for="add-title">Title</label>
+            <input id="add-title" class="text"></input>
+            <label for="add-description">Description</label>
+            <input id="add-description" class="text"></input>
+          </form>
+          <div class="add-project-buttons-container">
+            <button class="add-todo-button">Add</button>
+            <button class="cancel-new-todo">Cancel</button>
+          </div>
+        </div>
       </div>
     </div>
     <script type="module" src="/main.js"></script>

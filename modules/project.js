@@ -8,7 +8,9 @@ export default class Project {
 
   addTodo(title, description) {
     const newTodo = new TodoItem(title, description);
+    if (!newTodo.title || !newTodo.description) return false;
     this.todoList.push(newTodo);
+    return true;
   }
 
   deleteTodo(todoIndex) {

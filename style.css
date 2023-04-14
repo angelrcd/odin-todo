@@ -141,3 +141,20 @@ header img{
 .cancel-new-project {
   background: red;
 }
+
+/* New todo form */
+
+.show-new-todo-form {
+  background: url(/plus.svg);
+  background-color: #87cefa;
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  border-radius: 50%;
+  border: none;
+}
+
+.new-todo-form form {
+  display: flex;
+  flex-direction: column;
+}

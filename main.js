@@ -1,14 +1,20 @@
 import Project from "./modules/project";
 import DisplayController from "./modules/DisplayController";
-import { NewProjectFormController } from "./modules/formsController";
+import {
+  NewProjectFormController,
+  AddTodoFormController,
+} from "./modules/formsController";
 
 const addProjectButton = document.querySelector(".add-project-button");
 const addTodoButton = document.querySelector(".add-todo-button");
 const showNewProjectFormButton = document.querySelector(
   ".show-new-project-form"
 );
+const showNewTodoFormButton = document.querySelector(".show-new-todo-form");
 const newProjectNameInput = document.querySelector(".new-project-form input");
 const cancelNewProjectButton = document.querySelector(".cancel-new-project");
+const cancelNewTodoButton = document.querySelector(".cancel-new-todo");
+const todoTitleForm = document.querySelector("#add-title");
 
 const app = (function () {
   const _projectList = [];
@@ -46,7 +52,7 @@ const app = (function () {
   };
 
   const init = () => {
-    addProject("default");
+    addProject("Default");
     setCurrentProject(0);
     DisplayController.updateDisplay(_projectList, _currentProject);
   };
@@ -132,11 +138,26 @@ projectListContainer.addEventListener("click", (e) => {
   }
 });
 
+// Events listeners regarding adding new todo elements
+showNewTodoFormButton.addEventListener("click", () => {
+  AddTodoFormController.toggleForm();
+  todoTitleForm.focus();
+});
+
+cancelNewTodoButton.addEventListener("click", () => {
+  AddTodoFormController.toggleForm();
+});
+
 addTodoButton.addEventListener("click", () => {
   const currentProject = app.getCurrentProject();
-  currentProject.addTodo("titulo", "descripcion");
-  DisplayController.updateDisplay(
-    app.getProjectList(),
-    app.getCurrentProject()
-  );
+  const inputsValue = AddTodoFormController.getInputsValue();
+  const wasTodoAdded = currentProject.addTodo(...inputsValue);
+  if (wasTodoAdded) {
+    AddTodoFormController.clearInputs();
+    AddTodoFormController.toggleForm();
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
+    );
+  }
 });
