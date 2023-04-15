@@ -31,16 +31,23 @@
         <button class="show-new-todo-form"></button>
         <div class="new-todo-form hidden">
           <form action="">
-            <select name="priority" id="priority">
-              <option value="low">low</option>
-              <option value="middle">middle</option>
-              <option value="urgent">urgent</option>
-            </select>
+            <div>
+              <label for="priority">Priority</label>
+              <select name="priority" id="priority">
+                <option value="low">low</option>
+                <option value="middle">mid</option>
+                <option value="urgent">urgent</option>
+              </select>
+            </div>
 
-            <label for="add-title">Title</label>
-            <input id="add-title" class="text" />
-            <label for="add-description">Description</label>
-            <input id="add-description" class="text" />
+            <div>
+              <label for="add-title">Title</label>
+              <input id="add-title" class="text" />
+            </div>
+            <div>
+              <label for="add-description">Description</label>
+              <input id="add-description" class="text" />
+            </div>
           </form>
           <div class="add-project-buttons-container">
             <button class="add-todo-button">Add</button>

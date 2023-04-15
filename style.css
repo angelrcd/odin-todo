@@ -157,7 +157,18 @@ header img{
 
 .new-todo-form form {
   display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+}
+
+.new-todo-form form div {
+  display: flex;
   flex-direction: column;
+}
+
+.new-todo-form * {
+  flex: 1 1 30%;
 }
 
 /* Todo element styling */
