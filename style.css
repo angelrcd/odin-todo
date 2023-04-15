@@ -158,3 +158,44 @@ header img{
   display: flex;
   flex-direction: column;
 }
+
+/* Todo element styling */
+#current-project ul {
+  list-style: none;
+}
+
+.todo-element-container {
+  min-width: 400px;
+  border-bottom: 1px solid black;
+}
+
+.todo-element-container .title-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.todo-element-container p {
+  margin-left: 1.9rem;
+}
+
+.todo-element-container input[type="checkbox"]{
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.todo-element-container .buttons-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+  padding-left: 1.9rem;
+}
+
+.todo-element-container .date {
+  font-size: 0.8rem;
+  margin-left: auto;
+}
+
+.todo-element-container.complete h3 {
+  text-decoration: line-through;
+}

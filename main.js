@@ -161,3 +161,29 @@ addTodoButton.addEventListener("click", () => {
     );
   }
 });
+
+// Event listener for checking, edit and delete todos
+const todoList = document.querySelector("#current-project ul");
+todoList.addEventListener("click", (e) => {
+  const currentProject = app.getCurrentProject();
+  const todoIndex = e.target
+    .closest(".todo-element-container")
+    .getAttribute("data-index");
+  console.log(todoIndex);
+  // Set todo as complete
+  if (e.target.type === "checkbox") {
+    currentProject.todoList[todoIndex].toggleComplete();
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
+    );
+  }
+  // Delete todo
+  if (e.target.classList.contains("delete-todo")) {
+    currentProject.deleteTodo(todoIndex);
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
+    );
+  }
+});

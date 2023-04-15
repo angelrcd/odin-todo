@@ -1,3 +1,5 @@
+import getTodoElement from "./getTodoElement";
+
 export default class DisplayController {
   static updateDisplay(projectList, currentProject) {
     this.#updateProjectListDisplay(projectList, currentProject);
@@ -37,10 +39,9 @@ export default class DisplayController {
     currentProjectTitle.textContent = currentProject.projectName;
     const listOfTodos = currentProject.todoList;
 
-    listOfTodos.forEach((todo) => {
-      const listItem = document.createElement("li");
-      listItem.classList.add("todo-container");
-      listItem.textContent = `${todo.title} - ${todo.description}`;
+    listOfTodos.forEach((todo, index) => {
+      const listItem = getTodoElement(todo);
+      listItem.setAttribute("data-index", index);
 
       todoListElement.appendChild(listItem);
     });
