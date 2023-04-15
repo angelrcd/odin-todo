@@ -2,13 +2,17 @@ export default function getTodoElement(todo) {
   const isTodoChecked = todo.isComplete;
   const todoElement = document.createElement("li");
   todoElement.classList.add("todo-element-container");
+  todoElement.setAttribute("data-priority", todo.priority);
 
   todoElement.innerHTML = `
-  <div class="title-row">
+          <p class="priority-indicator ${
+            todo.priority
+          }">${todo.priority.toUpperCase()} priority</p>
+          <div class="title-row">
             <input type="checkbox" name="" id="" />
             <h3>${todo.title}</h3>
           </div>
-          <p>${todo.description}</p>
+          <p class="description">${todo.description}</p>
           <div class="buttons-row">
             <button class="edit-todo">Edit</button>
             <button class ="delete-todo">Delete</button>

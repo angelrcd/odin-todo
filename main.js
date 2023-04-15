@@ -54,6 +54,7 @@ const app = (function () {
   const init = () => {
     addProject("Default");
     setCurrentProject(0);
+    _currentProject.addTodo("Example todo", "This is an example todo.", "low");
     DisplayController.updateDisplay(_projectList, _currentProject);
   };
 
@@ -160,6 +161,7 @@ addTodoButton.addEventListener("click", () => {
       app.getCurrentProject()
     );
   }
+  console.log(currentProject.todoList.at(-1));
 });
 
 // Event listener for checking, edit and delete todos
@@ -186,4 +188,12 @@ todoList.addEventListener("click", (e) => {
       app.getCurrentProject()
     );
   }
+  // Edit todo
+  if (e.target.classList.contains("edit-todo")) {
+    currentProject.todoList[todoIndex].editTodo("a", "b");
+  }
+  DisplayController.updateDisplay(
+    app.getProjectList(),
+    app.getCurrentProject()
+  );
 });

@@ -6,8 +6,8 @@ export default class Project {
     this.todoList = [];
   }
 
-  addTodo(title, description) {
-    const newTodo = new TodoItem(title, description);
+  addTodo(title, description, priority) {
+    const newTodo = new TodoItem(title, description, priority);
     if (!newTodo.title || !newTodo.description) return false;
     this.todoList.push(newTodo);
     return true;

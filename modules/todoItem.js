@@ -1,7 +1,8 @@
 export default class TodoItem {
-  constructor(title, description) {
+  constructor(title, description, priority) {
     this._title = title;
     this._description = description;
+    this.priority = priority;
     this.isComplete = false;
     this.creationDate = new Date();
     this.lastEditDate = null;
@@ -37,6 +38,12 @@ export default class TodoItem {
 
   // returns creation date or last edit date if it exists
   getDate() {
-    return this.lastEditDate ? this.lastEditDate : this.creationDate;
+    const prefix = this.lastEditDate ? "Edited" : "Created";
+    const date = this.lastEditDate ? this.lastEditDate : this.creationDate;
+    return `${prefix}: ${String(date.getMonth() + 1).padStart(2, "0")}/${String(
+      date.getDate()
+    ).padStart(2, "0")}/${date.getFullYear()} ${String(
+      date.getHours()
+    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   }
 }
