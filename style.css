@@ -213,18 +213,13 @@ header img{
   text-decoration: line-through;
 }
 
-.todo-element-container[data-priority=low] input, .priority-indicator.low {
-  color: green;
-  border-color: green;
+/* edit modal */
+
+#edit-modal {
+  position: fixed;
+  margin: 150px auto;
 }
 
-.todo-element-container[data-priority=middle] input, .priority-indicator.middle  {
-  color: yellow;
-  border-color: yellow;
+#edit-modal::backdrop {
+  background-color: RGBA(0, 0, 0, 0.75);
 }
-
-.todo-element-container[data-priority=urgent] input, .priority-indicator.urgent  {
-  color: red;
-  border-color: red;
-}
-

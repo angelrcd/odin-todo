@@ -10,6 +10,11 @@ const todoTitleForm = document.querySelector("#add-title");
 const todoDescriptionForm = document.querySelector("#add-description");
 const todoPriorityForm = document.querySelector("select#priority");
 
+const editModal = document.querySelector("#edit-modal");
+const editTitle = document.querySelector("#edit-modal .new-title");
+const editDescription = document.querySelector("#edit-modal .new-description");
+const editPriority = document.querySelector("#edit-modal select");
+
 export class NewProjectFormController {
   static toggleForm() {
     newProjectForm.classList.toggle("hidden");
@@ -43,5 +48,27 @@ export class AddTodoFormController {
     todoTitleForm.value = "";
     todoDescriptionForm.value = "";
     todoPriorityForm.value = "low";
+  }
+}
+
+export class EditTodoFormController {
+  static openModal(todo, index) {
+    editModal.setAttribute("data-index", index);
+    editTitle.textContent = todo.title;
+    editDescription.textContent = todo.description;
+    editPriority.value = todo.priority;
+    editModal.showModal();
+  }
+
+  static closeModal() {
+    editModal.close();
+  }
+
+  static getNewValues() {
+    return [
+      editTitle.textContent,
+      editDescription.textContent,
+      editPriority.value,
+    ];
   }
 }

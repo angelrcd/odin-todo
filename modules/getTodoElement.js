@@ -14,7 +14,7 @@ export default function getTodoElement(todo) {
           </div>
           <p class="description">${todo.description}</p>
           <div class="buttons-row">
-            <button class="edit-todo">Edit</button>
+            <button class="show-edit-todo-form">Edit</button>
             <button class ="delete-todo">Delete</button>
             <p class="date">${todo.getDate()}</p>
           </div>

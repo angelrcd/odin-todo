@@ -3,6 +3,7 @@ import DisplayController from "./modules/DisplayController";
 import {
   NewProjectFormController,
   AddTodoFormController,
+  EditTodoFormController,
 } from "./modules/formsController";
 
 const addProjectButton = document.querySelector(".add-project-button");
@@ -15,6 +16,9 @@ const newProjectNameInput = document.querySelector(".new-project-form input");
 const cancelNewProjectButton = document.querySelector(".cancel-new-project");
 const cancelNewTodoButton = document.querySelector(".cancel-new-todo");
 const todoTitleForm = document.querySelector("#add-title");
+
+const saveEditButton = document.querySelector("#edit-modal .edit-todo");
+const editModal = document.querySelector("#edit-modal");
 
 const app = (function () {
   const _projectList = [];
@@ -171,7 +175,6 @@ todoList.addEventListener("click", (e) => {
   const todoIndex = e.target
     .closest(".todo-element-container")
     .getAttribute("data-index");
-  console.log(todoIndex);
   // Set todo as complete
   if (e.target.type === "checkbox") {
     currentProject.todoList[todoIndex].toggleComplete();
@@ -189,9 +192,20 @@ todoList.addEventListener("click", (e) => {
     );
   }
   // Edit todo
-  if (e.target.classList.contains("edit-todo")) {
-    currentProject.todoList[todoIndex].editTodo("a", "b");
+  if (e.target.classList.contains("show-edit-todo-form")) {
+    EditTodoFormController.openModal(
+      currentProject.todoList[todoIndex],
+      todoIndex
+    );
   }
+});
+
+saveEditButton.addEventListener("click", () => {
+  const index = editModal.getAttribute("data-index");
+  const newTodoValues = EditTodoFormController.getNewValues();
+
+  app.getCurrentProject().todoList[index].editTodo(...newTodoValues);
+  EditTodoFormController.closeModal();
   DisplayController.updateDisplay(
     app.getProjectList(),
     app.getCurrentProject()

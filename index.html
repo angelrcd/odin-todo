@@ -8,6 +8,19 @@
     <title>Vite App</title>
   </head>
   <body>
+    <dialog id="edit-modal">
+      <p contenteditable="true" class="new-title">a</p>
+      <p contenteditable="true" class="new-description">b</p>
+      <div>
+        <label for="edit-priority">Priority</label>
+        <select name="priority" id="edit-priority">
+          <option value="low">low</option>
+          <option value="middle">mid</option>
+          <option value="urgent">urgent</option>
+        </select>
+      </div>
+      <button class="edit-todo">Edit</button>
+    </dialog>
     <header>
       <img src="/logo.svg" alt="logo" />
       <h1>Todo List</h1>

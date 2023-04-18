@@ -26,9 +26,10 @@ export default class TodoItem {
     this._description = newDescription;
   }
 
-  editTodo(newTitle, newDescription) {
+  editTodo(newTitle, newDescription, priority) {
     this.title = newTitle;
     this.description = newDescription;
+    this.priority = priority;
     this.lastEditDate = new Date();
   }
 
