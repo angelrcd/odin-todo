@@ -59,6 +59,8 @@ const app = (function () {
     addProject("Default");
     setCurrentProject(0);
     _currentProject.addTodo("Example todo", "This is an example todo.", "low");
+    _currentProject.todoList[0].addTask("Example task item 1", true);
+    _currentProject.todoList[0].addTask("Example task item 2");
     DisplayController.updateDisplay(_projectList, _currentProject);
   };
 
@@ -176,7 +178,10 @@ todoList.addEventListener("click", (e) => {
     .closest(".todo-element-container")
     .getAttribute("data-index");
   // Set todo as complete
-  if (e.target.type === "checkbox") {
+  if (
+    e.target.type === "checkbox" &&
+    e.target.classList.contains("complete-todo")
+  ) {
     currentProject.todoList[todoIndex].toggleComplete();
     DisplayController.updateDisplay(
       app.getProjectList(),
@@ -196,6 +201,18 @@ todoList.addEventListener("click", (e) => {
     EditTodoFormController.openModal(
       currentProject.todoList[todoIndex],
       todoIndex
+    );
+  }
+  // Change task completeness
+  if (
+    e.target.type === "checkbox" &&
+    e.target.classList.contains("task-complete")
+  ) {
+    const taskIndex = e.target.closest("li").getAttribute("data-taskindex");
+    currentProject.todoList[todoIndex].toggleTaskComplete(taskIndex);
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
     );
   }
 });

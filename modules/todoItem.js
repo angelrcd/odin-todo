@@ -3,6 +3,7 @@ export default class TodoItem {
     this._title = title;
     this._description = description;
     this.priority = priority;
+    this.taskList = [];
     this.isComplete = false;
     this.creationDate = new Date();
     this.lastEditDate = null;
@@ -33,6 +34,19 @@ export default class TodoItem {
     this.lastEditDate = new Date();
   }
 
+  getTaskList() {
+    return this.taskList;
+  }
+
+  addTask(text, isComplete) {
+    const task = new Task(text, isComplete);
+    this.taskList.push(task);
+  }
+
+  toggleTaskComplete(index) {
+    this.taskList[index].toggleComplete();
+  }
+
   toggleComplete() {
     this.isComplete = !this.isComplete;
   }
@@ -46,5 +60,16 @@ export default class TodoItem {
     ).padStart(2, "0")}/${date.getFullYear()} ${String(
       date.getHours()
     ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+  }
+}
+
+class Task {
+  constructor(text, isComplete = false) {
+    this.text = text;
+    this.isComplete = isComplete;
+  }
+
+  toggleComplete() {
+    this.isComplete = !this.isComplete;
   }
 }

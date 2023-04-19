@@ -9,10 +9,15 @@ export default function getTodoElement(todo) {
             todo.priority
           }">${todo.priority.toUpperCase()} priority</p>
           <div class="title-row">
-            <input type="checkbox" name="" id="" />
+            <input class="complete-todo" type="checkbox" name="" id="" />
             <h3>${todo.title}</h3>
           </div>
           <p class="description">${todo.description}</p>
+      
+          <ul class="tasks-list">
+            ${getTaskListElement(todo)}
+          </ul>
+
           <div class="buttons-row">
             <button class="show-edit-todo-form">Edit</button>
             <button class ="delete-todo">Delete</button>
@@ -26,4 +31,19 @@ export default function getTodoElement(todo) {
   }
 
   return todoElement;
+}
+
+function getTaskListElement(todo) {
+  const taskList = todo.getTaskList();
+  let result = "";
+  console.log(taskList);
+  let index = 0;
+  for (const task of taskList) {
+    result += `<li data-taskIndex="${index}"><input ${
+      task.isComplete ? "checked" : ""
+    } type="checkbox" class="task-complete"><p>${task.text}</p></li>`;
+    index++;
+  }
+
+  return result;
 }
