@@ -221,6 +221,7 @@ saveEditButton.addEventListener("click", () => {
   const newTodoValues = EditTodoFormController.getNewValues();
 
   app.getCurrentProject().todoList[index].editTodo(...newTodoValues);
+  app.getCurrentProject().todoList[index].replaceTasks(newTodoValues[3]);
   EditTodoFormController.closeModal();
   DisplayController.updateDisplay(
     app.getProjectList(),

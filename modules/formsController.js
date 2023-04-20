@@ -78,12 +78,11 @@ export class EditTodoFormController {
       (taskItem) => taskItem.textContent
     );
 
-    console.log(newTaskValues);
     return [
       editTitle.textContent,
       editDescription.textContent,
       editPriority.value,
-      [],
+      newTaskValues,
     ];
   }
 }

@@ -43,6 +43,14 @@ export default class TodoItem {
     this.taskList.push(task);
   }
 
+  replaceTasks(listTask) {
+    this.taskList.length = 0;
+    for (const task of listTask) {
+      const taskItem = new Task(task);
+      this.taskList.push(taskItem);
+    }
+  }
+
   toggleTaskComplete(index) {
     this.taskList[index].toggleComplete();
   }
