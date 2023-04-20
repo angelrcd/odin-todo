@@ -19,6 +19,7 @@ const todoTitleForm = document.querySelector("#add-title");
 
 const saveEditButton = document.querySelector("#edit-modal .edit-todo");
 const editModal = document.querySelector("#edit-modal");
+const addTaskEdit = document.querySelector(".edit-add-task");
 
 const app = (function () {
   const _projectList = [];
@@ -227,4 +228,15 @@ saveEditButton.addEventListener("click", () => {
     app.getProjectList(),
     app.getCurrentProject()
   );
+});
+
+addTaskEdit.addEventListener("click", () => {
+  const index = editModal.getAttribute("data-index");
+  const editTaskList = document.querySelector(".edit-todo-tasks");
+
+  const newTask = document.createElement("li");
+  newTask.textContent = "Task";
+  newTask.contentEditable = true;
+
+  editTaskList.appendChild(newTask);
 });
