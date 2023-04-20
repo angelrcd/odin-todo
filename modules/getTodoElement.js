@@ -36,7 +36,6 @@ export default function getTodoElement(todo) {
 function getTaskListElement(todo) {
   const taskList = todo.getTaskList();
   let result = "";
-  console.log(taskList);
   let index = 0;
   for (const task of taskList) {
     result += `<li data-taskIndex="${index}"><input ${

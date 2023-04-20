@@ -204,6 +204,11 @@ header img{
   padding-left: 1.9rem;
 }
 
+.tasks-list li{
+  display: flex;
+  gap: 0.5rem
+}
+
 .todo-element-container .date {
   font-size: 0.8rem;
   margin-left: auto;

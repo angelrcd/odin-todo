@@ -137,7 +137,6 @@ projectListContainer.addEventListener("click", (e) => {
   } else if (e.target.classList.contains("project-container")) {
     const projectIndex = +e.target.getAttribute("data-index");
     app.setCurrentProject(projectIndex);
-
     DisplayController.updateDisplay(
       app.getProjectList(),
       app.getCurrentProject()
