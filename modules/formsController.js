@@ -62,8 +62,7 @@ export class EditTodoFormController {
     editTaskList.innerHTML = "";
     for (const task of todo.taskList) {
       const taskList = document.createElement("li");
-      taskList.contentEditable = true;
-      taskList.textContent = task.text;
+      taskList.innerHTML = `<p contentEditable>${task.text}</p><button class="delete-task"></button>`;
       editTaskList.appendChild(taskList);
     }
     editModal.showModal();
@@ -71,6 +70,14 @@ export class EditTodoFormController {
 
   static closeModal() {
     editModal.close();
+  }
+
+  static addTask() {
+    const newTask = document.createElement("li");
+    newTask.innerHTML =
+      "<p contentEditable>Task</p><button class='delete-task'></button>";
+
+    editTaskList.appendChild(newTask);
   }
 
   static getNewValues() {

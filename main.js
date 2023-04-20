@@ -230,13 +230,11 @@ saveEditButton.addEventListener("click", () => {
   );
 });
 
-addTaskEdit.addEventListener("click", () => {
-  const index = editModal.getAttribute("data-index");
-  const editTaskList = document.querySelector(".edit-todo-tasks");
+addTaskEdit.addEventListener("click", EditTodoFormController.addTask);
 
-  const newTask = document.createElement("li");
-  newTask.textContent = "Task";
-  newTask.contentEditable = true;
-
-  editTaskList.appendChild(newTask);
+editModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-task")) {
+    const listItem = e.target.closest("li");
+    listItem.remove();
+  }
 });
