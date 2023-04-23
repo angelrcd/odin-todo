@@ -14,6 +14,7 @@ const editModal = document.querySelector("#edit-modal");
 const editTitle = document.querySelector("#edit-modal .new-title");
 const editDescription = document.querySelector("#edit-modal .new-description");
 const editPriority = document.querySelector("#edit-modal select");
+const editTaskList = document.querySelector(".edit-todo-tasks");
 
 export class NewProjectFormController {
   static toggleForm() {
@@ -57,6 +58,13 @@ export class EditTodoFormController {
     editTitle.textContent = todo.title;
     editDescription.textContent = todo.description;
     editPriority.value = todo.priority;
+
+    editTaskList.innerHTML = "";
+    for (const task of todo.taskList) {
+      const taskList = document.createElement("li");
+      taskList.innerHTML = `<p contentEditable>${task.text}</p><button class="delete-task"></button>`;
+      editTaskList.appendChild(taskList);
+    }
     editModal.showModal();
   }
 
@@ -64,11 +72,24 @@ export class EditTodoFormController {
     editModal.close();
   }
 
+  static addTask() {
+    const newTask = document.createElement("li");
+    newTask.innerHTML =
+      "<p contentEditable>Task</p><button class='delete-task'></button>";
+
+    editTaskList.appendChild(newTask);
+  }
+
   static getNewValues() {
+    let newTaskValues = Array.from(editTaskList.querySelectorAll("li")).map(
+      (taskItem) => taskItem.textContent
+    );
+
     return [
       editTitle.textContent,
       editDescription.textContent,
       editPriority.value,
+      newTaskValues,
     ];
   }
 }

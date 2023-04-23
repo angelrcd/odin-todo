@@ -19,6 +19,7 @@ const todoTitleForm = document.querySelector("#add-title");
 
 const saveEditButton = document.querySelector("#edit-modal .edit-todo");
 const editModal = document.querySelector("#edit-modal");
+const addTaskEdit = document.querySelector(".edit-add-task");
 
 const app = (function () {
   const _projectList = [];
@@ -59,6 +60,8 @@ const app = (function () {
     addProject("Default");
     setCurrentProject(0);
     _currentProject.addTodo("Example todo", "This is an example todo.", "low");
+    _currentProject.todoList[0].addTask("Example task item 1", true);
+    _currentProject.todoList[0].addTask("Example task item 2");
     DisplayController.updateDisplay(_projectList, _currentProject);
   };
 
@@ -135,7 +138,6 @@ projectListContainer.addEventListener("click", (e) => {
   } else if (e.target.classList.contains("project-container")) {
     const projectIndex = +e.target.getAttribute("data-index");
     app.setCurrentProject(projectIndex);
-
     DisplayController.updateDisplay(
       app.getProjectList(),
       app.getCurrentProject()
@@ -176,7 +178,10 @@ todoList.addEventListener("click", (e) => {
     .closest(".todo-element-container")
     .getAttribute("data-index");
   // Set todo as complete
-  if (e.target.type === "checkbox") {
+  if (
+    e.target.type === "checkbox" &&
+    e.target.classList.contains("complete-todo")
+  ) {
     currentProject.todoList[todoIndex].toggleComplete();
     DisplayController.updateDisplay(
       app.getProjectList(),
@@ -198,6 +203,18 @@ todoList.addEventListener("click", (e) => {
       todoIndex
     );
   }
+  // Change task completeness
+  if (
+    e.target.type === "checkbox" &&
+    e.target.classList.contains("task-complete")
+  ) {
+    const taskIndex = e.target.closest("li").getAttribute("data-taskindex");
+    currentProject.todoList[todoIndex].toggleTaskComplete(taskIndex);
+    DisplayController.updateDisplay(
+      app.getProjectList(),
+      app.getCurrentProject()
+    );
+  }
 });
 
 saveEditButton.addEventListener("click", () => {
@@ -205,9 +222,19 @@ saveEditButton.addEventListener("click", () => {
   const newTodoValues = EditTodoFormController.getNewValues();
 
   app.getCurrentProject().todoList[index].editTodo(...newTodoValues);
+  app.getCurrentProject().todoList[index].replaceTasks(newTodoValues[3]);
   EditTodoFormController.closeModal();
   DisplayController.updateDisplay(
     app.getProjectList(),
     app.getCurrentProject()
   );
+});
+
+addTaskEdit.addEventListener("click", EditTodoFormController.addTask);
+
+editModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-task")) {
+    const listItem = e.target.closest("li");
+    listItem.remove();
+  }
 });
