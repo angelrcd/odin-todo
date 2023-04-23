@@ -1,10 +1,12 @@
 import Project from "./modules/project";
+import TodoItem from "./modules/todoItem";
 import DisplayController from "./modules/DisplayController";
 import {
   NewProjectFormController,
   AddTodoFormController,
   EditTodoFormController,
 } from "./modules/formsController";
+import { deserialize, serialize } from "./modules/serialization";
 
 const addProjectButton = document.querySelector(".add-project-button");
 const addTodoButton = document.querySelector(".add-todo-button");
@@ -59,10 +61,17 @@ const app = (function () {
   const init = () => {
     addProject("Default");
     setCurrentProject(0);
-    _currentProject.addTodo("Example todo", "This is an example todo.", "low");
+    _currentProject.addTodo(
+      new TodoItem("Example todo", "This is an example todo", "low")
+    );
+    console.log(_currentProject);
     _currentProject.todoList[0].addTask("Example task item 1", true);
     _currentProject.todoList[0].addTask("Example task item 2");
     DisplayController.updateDisplay(_projectList, _currentProject);
+
+    const ser = serialize(app.getProjectList());
+    console.log(ser);
+    console.log(deserialize(ser));
   };
 
   return {
@@ -158,7 +167,7 @@ cancelNewTodoButton.addEventListener("click", () => {
 addTodoButton.addEventListener("click", () => {
   const currentProject = app.getCurrentProject();
   const inputsValue = AddTodoFormController.getInputsValue();
-  const wasTodoAdded = currentProject.addTodo(...inputsValue);
+  const wasTodoAdded = currentProject.addTodo(new TodoItem(...inputsValue));
   if (wasTodoAdded) {
     AddTodoFormController.clearInputs();
     AddTodoFormController.toggleForm();

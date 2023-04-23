@@ -1,15 +1,12 @@
-import TodoItem from "./todoItem";
-
 export default class Project {
   constructor(projectName) {
     this.projectName = projectName;
     this.todoList = [];
   }
 
-  addTodo(title, description, priority) {
-    const newTodo = new TodoItem(title, description, priority);
-    if (!newTodo.title || !newTodo.description) return false;
-    this.todoList.push(newTodo);
+  addTodo(todo) {
+    if (!todo.title || !todo.description) return false;
+    this.todoList.push(todo);
     return true;
   }
 
