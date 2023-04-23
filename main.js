@@ -6,7 +6,8 @@ import {
   AddTodoFormController,
   EditTodoFormController,
 } from "./modules/formsController";
-import { deserialize, serialize } from "./modules/serialization";
+import { deserialize } from "./modules/serialization";
+import saveStorage from "./modules/Storage";
 
 const addProjectButton = document.querySelector(".add-project-button");
 const addTodoButton = document.querySelector(".add-todo-button");
@@ -24,7 +25,7 @@ const editModal = document.querySelector("#edit-modal");
 const addTaskEdit = document.querySelector(".edit-add-task");
 
 const app = (function () {
-  const _projectList = [];
+  let _projectList = [];
   let _currentProject;
 
   const getProjectList = () => {
@@ -59,19 +60,27 @@ const app = (function () {
   };
 
   const init = () => {
+    const storage = localStorage.getItem("appState");
+    if (storage) {
+      _projectList = deserialize(storage);
+      setCurrentProject(0);
+      DisplayController.updateDisplay(_projectList, _currentProject);
+      return;
+    }
+
+    // Initial setup if there is no storage
     addProject("Default");
     setCurrentProject(0);
     _currentProject.addTodo(
       new TodoItem("Example todo", "This is an example todo", "low")
     );
-    console.log(_currentProject);
     _currentProject.todoList[0].addTask("Example task item 1", true);
     _currentProject.todoList[0].addTask("Example task item 2");
     DisplayController.updateDisplay(_projectList, _currentProject);
 
-    const ser = serialize(app.getProjectList());
-    console.log(ser);
-    console.log(deserialize(ser));
+    // const ser = serialize(app.getProjectList());
+    // console.log(ser);
+    // console.log(deserialize(ser));
   };
 
   return {
@@ -83,6 +92,10 @@ const app = (function () {
     setCurrentProject,
   };
 })();
+
+const saveLocalStorage = () => {
+  saveStorage(app.getProjectList());
+};
 
 app.init();
 
@@ -100,6 +113,7 @@ addProjectButton.addEventListener("click", () => {
     app.getProjectList(),
     app.getCurrentProject()
   );
+  saveLocalStorage();
 });
 
 newProjectNameInput.addEventListener("keydown", (e) => {
@@ -121,6 +135,7 @@ newProjectNameInput.addEventListener("keydown", (e) => {
     app.getProjectList(),
     app.getCurrentProject()
   );
+  saveLocalStorage();
 });
 
 showNewProjectFormButton.addEventListener("click", () => {
@@ -144,6 +159,7 @@ projectListContainer.addEventListener("click", (e) => {
       app.getProjectList(),
       app.getCurrentProject()
     );
+    saveLocalStorage();
   } else if (e.target.classList.contains("project-container")) {
     const projectIndex = +e.target.getAttribute("data-index");
     app.setCurrentProject(projectIndex);
@@ -175,6 +191,7 @@ addTodoButton.addEventListener("click", () => {
       app.getProjectList(),
       app.getCurrentProject()
     );
+    saveLocalStorage();
   }
   console.log(currentProject.todoList.at(-1));
 });
@@ -196,6 +213,7 @@ todoList.addEventListener("click", (e) => {
       app.getProjectList(),
       app.getCurrentProject()
     );
+    saveLocalStorage();
   }
   // Delete todo
   if (e.target.classList.contains("delete-todo")) {
@@ -204,6 +222,7 @@ todoList.addEventListener("click", (e) => {
       app.getProjectList(),
       app.getCurrentProject()
     );
+    saveLocalStorage();
   }
   // Edit todo
   if (e.target.classList.contains("show-edit-todo-form")) {
@@ -223,6 +242,7 @@ todoList.addEventListener("click", (e) => {
       app.getProjectList(),
       app.getCurrentProject()
     );
+    saveLocalStorage();
   }
 });
 
@@ -237,6 +257,7 @@ saveEditButton.addEventListener("click", () => {
     app.getProjectList(),
     app.getCurrentProject()
   );
+  saveLocalStorage();
 });
 
 addTaskEdit.addEventListener("click", EditTodoFormController.addTask);
