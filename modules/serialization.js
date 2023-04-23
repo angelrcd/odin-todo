@@ -11,7 +11,7 @@ export function deserialize(jsonApp) {
     const projectObject = new Project(project.projectName);
 
     project.todoList.forEach((todo) => {
-      projectObject.addTodo(todo._title, todo._description, todo.priority);
+      projectObject.addTodo(TodoItem.getTodoInstanceFromSerialization(todo));
     });
     return projectObject;
   });
