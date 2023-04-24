@@ -9,6 +9,8 @@ import {
 import { deserialize } from "./modules/serialization";
 import saveStorage from "./modules/Storage";
 
+const projectListContainer = document.querySelector("#projects-list");
+
 const addProjectButton = document.querySelector(".add-project-button");
 const addTodoButton = document.querySelector(".add-todo-button");
 const showNewProjectFormButton = document.querySelector(
@@ -23,6 +25,11 @@ const todoTitleForm = document.querySelector("#add-title");
 const saveEditButton = document.querySelector("#edit-modal .edit-todo");
 const editModal = document.querySelector("#edit-modal");
 const addTaskEdit = document.querySelector(".edit-add-task");
+
+// Mobile menu functionality
+const mobileMenuButton = document.querySelector(".mobile-menu-button");
+const toggleMobileMenu = () => projectListContainer.classList.toggle("closed");
+mobileMenuButton.addEventListener("click", toggleMobileMenu);
 
 const app = (function () {
   let _projectList = [];
@@ -135,6 +142,7 @@ addProjectButton.addEventListener("click", () => {
   // set current project at the newly created
   app.setCurrentProject(app.getProjectList().length - 1);
 
+  toggleMobileMenu();
   DisplayController.updateDisplay(
     app.getProjectList(),
     app.getCurrentProject()
@@ -174,7 +182,6 @@ cancelNewProjectButton.addEventListener(
 );
 
 // Events listeners for changing current project and deleting them
-const projectListContainer = document.querySelector("#projects-list");
 projectListContainer.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-project")) {
     const deleteButton = e.target;
@@ -189,6 +196,7 @@ projectListContainer.addEventListener("click", (e) => {
   } else if (e.target.classList.contains("project-container")) {
     const projectIndex = +e.target.getAttribute("data-index");
     app.setCurrentProject(projectIndex);
+    toggleMobileMenu();
     DisplayController.updateDisplay(
       app.getProjectList(),
       app.getCurrentProject()

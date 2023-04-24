@@ -5,15 +5,15 @@ export default function getTodoElement(todo) {
   todoElement.setAttribute("data-priority", todo.priority);
 
   todoElement.innerHTML = `
-          <p class="priority-indicator ${
+          <p class="priority"><span class=" ${
             todo.priority
-          }">${todo.priority.toUpperCase()} priority</p>
+          }">${todo.priority.toUpperCase()}</span> priority</p>
           <div class="title-row">
             <label class="input-container">
               <input class="complete-todo" type="checkbox" name="" />
               <div class="checkbox"></div>
+              <h3>${todo.title}</h3>
             </label>
-            <h3>${todo.title}</h3>
           </div>
           <p class="description">${todo.description}</p>
       
@@ -22,8 +22,8 @@ export default function getTodoElement(todo) {
           </ul>
 
           <div class="buttons-row">
-            <button class="show-edit-todo-form">Edit</button>
-            <button class ="delete-todo">Delete</button>
+            <button title="Edit todo" class="show-edit-todo-form"></button>
+            <button title="Delete todo" class ="delete-todo"></button>
             <p class="date">${todo.getDate()}</p>
           </div>
   `;
@@ -41,9 +41,14 @@ function getTaskListElement(todo) {
   let result = "";
   let index = 0;
   for (const task of taskList) {
-    result += `<li data-taskIndex="${index}"><input ${
-      task.isComplete ? "checked" : ""
-    } type="checkbox" class="task-complete"><p>${task.text}</p></li>`;
+    result += `<li data-taskIndex="${index}">
+      <label>
+        <input ${
+          task.isComplete ? "checked" : ""
+        } type="checkbox" class="task-complete">
+        <p>${task.text}</p>
+      </label>
+    </li>`;
     index++;
   }
 

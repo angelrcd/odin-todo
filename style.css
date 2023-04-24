@@ -29,6 +29,19 @@ p, h1, h2, h3, h4, h5, h6 {
   isolation: isolate;
 }
 
+:root {
+  --project-sidebar-bg-color: #87cefa;
+  --project-sidebar-current-bg-color : #58ade2;
+  --project-sidebar-hover-bg-color : #71afd6;
+
+  --color-positive : #84cc16;
+  --color-positive-dark : #14532d;
+  --color-negative : #f87171;
+  --color-negative-dark : #7f1d1d;
+  --color-middle : #fde047;
+  --color-middle-dark : #ca8a04;
+}
+
 .hidden {
   display: none;
 }
@@ -46,13 +59,28 @@ header img{
   height: 4rem;
 }
 
+.projects-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mobile-menu-button {
+  display: none;
+  flex-shrink: 0;
+  height: 36px;
+  aspect-ratio: 1;
+
+  border: none;
+  background: url(/menu.svg);
+}
+
 #app {
   display: flex;
   gap: 1rem;
 }
 
 #projects-list {
-  background-color: #87cefa;
+  background-color: var(--project-sidebar-bg-color);
   min-height: 100vh;
   padding: 1rem;
   width: 300px;
@@ -76,7 +104,7 @@ header img{
 }
 
 .project-container:hover:not(.current-project), .show-new-project-form:hover {
-  background: #71afd6;
+  background: var(--project-sidebar-hover-bg-color);
 }
 
 #projects-list h2, #current-project h2 {
@@ -106,7 +134,7 @@ header img{
 }
 
 .current-project {
-  background: #58ade2;
+  background: var(--project-sidebar-current-bg-color);
 }
 
 /* New project form */
@@ -131,32 +159,33 @@ header img{
 .add-project-buttons-container button {
   width: 100%;
   padding: 0.2rem 1rem;
-  border: none;
   border-radius: 5px;
+  font-weight: 600;
 }
 
 .add-project-button {
-  background: green;
+  background: var(--color-positive);
+  border: 1px solid var(--color-positive-dark);
 }
 
 .cancel-new-project {
-  background: red;
+  background: var(--color-negative);
+  border: 1px solid var(--color-negative-dark);
 }
 
 /* Checkbox input customization */
 .input-container {
   display: flex;
-}
-
-.todo-element-container input[type="checkbox"]{
-  
+  align-items: center;
+  gap: 0.5rem;
 }
 
 div.checkbox {
   width: 1.4rem;
   height: 1.4rem;
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 50%;
+  flex-shrink: 0;
 }
 
 input.complete-todo {
@@ -164,15 +193,18 @@ input.complete-todo {
 }
 
 .todo-element-container[data-priority = "low"] .complete-todo:checked ~ .checkbox {
-  background: green;
+  background: var(--color-positive);
+  border-color: var(--color-positive-dark);
 }
 
 .todo-element-container[data-priority = "middle"] .complete-todo:checked ~ .checkbox {
-  background: yellow;
+  background: var(--color-middle);
+  border-color: var(--color-middle-dark);
 }
 
 .todo-element-container[data-priority = "urgent"] .complete-todo:checked ~ .checkbox {
-  background: red;
+  background: var(--color-negative);
+  border-color: var(--color-negative-dark);
 }
 
 
@@ -183,6 +215,7 @@ input.complete-todo {
   background-color: #87cefa;
   height: 40px;
   width: 40px;
+  margin-top: 1rem;
   font-size: 30px;
   border-radius: 50%;
   border: none;
@@ -210,10 +243,31 @@ input.complete-todo {
 }
 
 .todo-element-container {
-  min-width: 400px;
+  min-width: 200px;
   border-bottom: 1px solid black;
   padding: 0.3rem;
 }
+
+.priority {
+  font-size: 0.85rem;
+}
+
+.priority .low {
+  color: var(--color-positive-dark);
+  font-weight: 900;
+}
+
+.priority .middle {
+  color: var(--color-middle-dark);
+  font-weight: 900;
+}
+
+.priority .urgent {
+  color: var(--color-negative-dark);
+  font-weight: 900;
+}
+
+
 
 .todo-element-container .title-row {
   display: flex;
@@ -232,7 +286,7 @@ input.complete-todo {
   padding-left: 1.9rem;
 }
 
-.tasks-list li{
+.tasks-list label{
   display: flex;
   gap: 0.5rem
 }
@@ -246,6 +300,22 @@ input.complete-todo {
   text-decoration: line-through;
 }
 
+.show-edit-todo-form, .delete-todo {
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.show-edit-todo-form {
+  background: url(/edit.svg);
+}
+
+.delete-todo {
+  background: url(/trash.svg);
+}
+
 /* edit modal */
 
 #edit-modal {
@@ -255,4 +325,41 @@ input.complete-todo {
 
 #edit-modal::backdrop {
   background-color: RGBA(0, 0, 0, 0.75);
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 0.2rem 1rem;
+  }
+
+  #app {
+    flex-direction: column;
+  }
+
+  #projects-list {
+    width: 100%;
+    min-height: fit-content;
+  }
+
+  .mobile-menu-button {
+    display: block;
+  }
+
+  #current-project {
+    padding: 1rem;
+  }
+
+  #current-project ul {
+    padding-left: 20px;
+  }
+
+  #projects-list h2 {
+    margin: 0px !important;
+  }
+
+  .closed ul, 
+  .closed .show-new-project-form, 
+  .closed .new-project-form {
+    display: none;
+  }
 }
