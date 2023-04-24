@@ -143,6 +143,39 @@ header img{
   background: red;
 }
 
+/* Checkbox input customization */
+.input-container {
+  display: flex;
+}
+
+.todo-element-container input[type="checkbox"]{
+  
+}
+
+div.checkbox {
+  width: 1.4rem;
+  height: 1.4rem;
+  border: 1px solid black;
+  border-radius: 50%;
+}
+
+input.complete-todo {
+  display: none;
+}
+
+.todo-element-container[data-priority = "low"] .complete-todo:checked ~ .checkbox {
+  background: green;
+}
+
+.todo-element-container[data-priority = "middle"] .complete-todo:checked ~ .checkbox {
+  background: yellow;
+}
+
+.todo-element-container[data-priority = "urgent"] .complete-todo:checked ~ .checkbox {
+  background: red;
+}
+
+
 /* New todo form */
 
 .show-new-todo-form {
@@ -190,11 +223,6 @@ header img{
 
 .todo-element-container .description {
   margin-left: 1.9rem;
-}
-
-.todo-element-container input[type="checkbox"]{
-  width: 1.4rem;
-  height: 1.4rem;
 }
 
 .todo-element-container .buttons-row {

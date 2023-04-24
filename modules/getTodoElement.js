@@ -9,7 +9,10 @@ export default function getTodoElement(todo) {
             todo.priority
           }">${todo.priority.toUpperCase()} priority</p>
           <div class="title-row">
-            <input class="complete-todo" type="checkbox" name="" id="" />
+            <label class="input-container">
+              <input class="complete-todo" type="checkbox" name="" />
+              <div class="checkbox"></div>
+            </label>
             <h3>${todo.title}</h3>
           </div>
           <p class="description">${todo.description}</p>
