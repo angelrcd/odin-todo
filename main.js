@@ -72,10 +72,36 @@ const app = (function () {
     addProject("Default");
     setCurrentProject(0);
     _currentProject.addTodo(
-      new TodoItem("Example todo", "This is an example todo", "low")
+      new TodoItem("A simple To-Do App", "A simple To-Do App", "low")
     );
-    _currentProject.todoList[0].addTask("Example task item 1", true);
-    _currentProject.todoList[0].addTask("Example task item 2");
+    _currentProject.addTodo(
+      new TodoItem(
+        "Todo with a list of tasks",
+        "Edit a todo to add or remove tasks",
+        "urgent"
+      )
+    );
+    _currentProject.todoList[1].addTask("Example task item 1", true);
+    _currentProject.todoList[1].addTask("Example task item 2");
+
+    addProject("Current project");
+    _projectList[1].addTodo(
+      new TodoItem(
+        "Responsive design",
+        "Make the app look good in many different screen sizes.",
+        "middle"
+      )
+    );
+    _projectList[1].todoList[0].addTask("Add media queries", true);
+    _projectList[1].todoList[0].addTask("Create mobile menu", false);
+    _projectList[1].addTodo(
+      new TodoItem("Sidebar", "Filter by project name.", "low")
+    );
+    _projectList[1].addTodo(
+      new TodoItem("Todo List", "Allow editing todo content.", "urgent")
+    );
+    _projectList[1].todoList[2].toggleComplete();
+
     DisplayController.updateDisplay(_projectList, _currentProject);
 
     // const ser = serialize(app.getProjectList());
