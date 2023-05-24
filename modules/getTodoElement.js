@@ -5,9 +5,8 @@ export default function getTodoElement(todo) {
   todoElement.setAttribute("data-priority", todo.priority);
 
   todoElement.innerHTML = `
-          <p class="priority"><span class=" ${
-            todo.priority
-          }">${todo.priority.toUpperCase()}</span> priority</p>
+          <p class="priority ${todo.priority}">
+          ${todo.priority} priority</p>
           <div class="title-row">
             <label class="input-container">
               <input class="complete-todo" type="checkbox" name="" />

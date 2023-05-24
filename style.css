@@ -35,6 +35,7 @@ p, h1, h2, h3, h4, h5, h6 {
   --project-sidebar-hover-bg-color : #71afd6;
 
   --color-header: #333333;
+  --color-todo-section-bg: #FAF9F8;
   --color-positive : #84cc16;
   --color-positive-dark : #14532d;
   --color-negative : #f87171;
@@ -198,10 +199,12 @@ header img{
 
 #current-project {
   flex-grow: 1;
+  background: var(--color-todo-section-bg);
 }
 
 .current-project {
   background: var(--project-sidebar-current-bg-color);
+  border-left: 4px solid var(--color-header);
 }
 
 /* New project form */
@@ -258,8 +261,8 @@ header img{
 }
 
 div.checkbox {
-  width: 1.4rem;
-  height: 1.4rem;
+  width: 1.2rem;
+  height: 1.2rem;
   border: 1px solid gray;
   border-radius: 50%;
   flex-shrink: 0;
@@ -269,19 +272,8 @@ input.complete-todo {
   display: none;
 }
 
-.todo-element-container[data-priority = "low"] .complete-todo:checked ~ .checkbox {
-  background: var(--color-positive);
-  border-color: var(--color-positive-dark);
-}
-
-.todo-element-container[data-priority = "middle"] .complete-todo:checked ~ .checkbox {
-  background: var(--color-middle);
-  border-color: var(--color-middle-dark);
-}
-
-.todo-element-container[data-priority = "urgent"] .complete-todo:checked ~ .checkbox {
-  background: var(--color-negative);
-  border-color: var(--color-negative-dark);
+.complete-todo:checked ~ .checkbox {
+  background: lightgray;
 }
 
 /* Current project info */
@@ -340,21 +332,29 @@ input.complete-todo {
 }
 
 .priority {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
+  width: fit-content;
+  padding: 0rem 0.7rem;
+  text-transform: uppercase;
+  /* color: white; */
+  border-radius: 20px;
 }
 
-.priority .low {
-  color: var(--color-positive-dark);
+.priority.low {
+  background: var(--color-positive);
+  border: 1px solid var(--color-positive-dark);
   font-weight: 900;
 }
 
-.priority .middle {
-  color: var(--color-middle-dark);
+.priority.middle {
+  background: var(--color-middle);
+  border: 1px solid var(--color-middle-dark);
   font-weight: 900;
 }
 
-.priority .urgent {
-  color: var(--color-negative-dark);
+.priority.urgent {
+  background: var(--color-negative);
+  border: 1px solid var(--color-negative-dark);
   font-weight: 900;
 }
 
