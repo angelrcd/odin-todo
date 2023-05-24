@@ -5,8 +5,6 @@ export default class TodoItem {
     this.priority = priority;
     this.taskList = [];
     this.isComplete = false;
-    this.creationDate = new Date();
-    this.lastEditDate = null;
   }
 
   get title() {
@@ -31,7 +29,6 @@ export default class TodoItem {
     this.title = newTitle;
     this.description = newDescription;
     this.priority = priority;
-    this.lastEditDate = new Date();
   }
 
   getTaskList() {
@@ -57,17 +54,6 @@ export default class TodoItem {
 
   toggleComplete() {
     this.isComplete = !this.isComplete;
-  }
-
-  // returns creation date or last edit date if it exists
-  getDate() {
-    const prefix = this.lastEditDate ? "Edited" : "Created";
-    const date = this.lastEditDate ? this.lastEditDate : this.creationDate;
-    return `${prefix}: ${String(date.getMonth() + 1).padStart(2, "0")}/${String(
-      date.getDate()
-    ).padStart(2, "0")}/${date.getFullYear()} ${String(
-      date.getHours()
-    ).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
   }
 }
 

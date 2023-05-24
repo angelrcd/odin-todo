@@ -33,7 +33,6 @@ export class NewProjectFormController {
 
 export class AddTodoFormController {
   static toggleForm() {
-    showNewTodoFormButton.classList.toggle("hidden");
     newTodoForm.classList.toggle("hidden");
   }
 

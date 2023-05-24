@@ -10,6 +10,7 @@
 }
 html, body {
   height: 100%;
+  background-color: var(--color-todo-section-bg);
 }
 body {
   line-height: 1.5;
@@ -259,6 +260,7 @@ header img{
   align-items: center;
   gap: 0.5rem;
   cursor: pointer;
+  margin-bottom: 0.4rem;
 }
 
 .todo-element-container .input-container:hover {
@@ -326,7 +328,7 @@ input.complete-todo {
 }
 
 /* Todo element styling */
-#current-project ul {
+#current-project > ul {
   list-style: none;
   margin-top: 2rem;
   padding: 0rem var(--separation-sections);
@@ -388,6 +390,18 @@ input.complete-todo {
   gap: 0.5rem;
   align-items: flex-end;
   padding-left: 1.9rem;
+  margin-top: 0.6rem;
+}
+
+.tasks-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3rem;
+}
+
+.tasks-list:empty {
+  display: none;
 }
 
 .tasks-list label{
@@ -449,7 +463,7 @@ input.complete-todo {
     padding: 1rem;
   }
 
-  #current-project ul {
+  #current-project > ul {
     padding-left: 20px;
   }
 
