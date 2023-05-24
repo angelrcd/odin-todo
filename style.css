@@ -124,25 +124,42 @@ header img{
   padding: var(--projects-list-items-padding);
 }
 
+.delete-project-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+}
+
+.delete-project-container:hover {
+  background: var(--project-sidebar-hover-bg-color);
+}
+
+.project-container:not(.current-project) .delete-project-container:hover {
+  background: var(--project-sidebar-current-bg-color);
+  aspect-ratio: 1/1;
+}
+
 .delete-project {
   display: none;
+
   background: url(/close.svg);
   background-repeat: no-repeat;
   background-position: 100% 50%;
+
   border: none;
   width: 1rem;
+  height: 1rem;
   cursor: pointer;
-}
-
-.delete-project:hover {
-  filter: brightness(0);
 }
 
 .project-container:hover .delete-project {
   display: block;
 }
 
-.current-project .delete-project{
+.current-project .delete-project {
   display: block;
 }
 
@@ -173,7 +190,7 @@ header img{
 .new-project-form input {
   width: 100%;
   margin-bottom: 0.3rem;
-  padding: 0.3rem 0rem;
+  padding: 0.3rem 0.2rem;
 }
 
 .add-project-buttons-container {
