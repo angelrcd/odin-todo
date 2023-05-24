@@ -19,7 +19,7 @@ const showNewProjectFormButton = document.querySelector(
 const showNewTodoFormButton = document.querySelector(".show-new-todo-form");
 const newProjectNameInput = document.querySelector(".new-project-form input");
 const cancelNewProjectButton = document.querySelector(".cancel-new-project");
-const cancelNewTodoButton = document.querySelector(".cancel-new-todo");
+const cancelNewTodoButton = document.querySelectorAll(".cancel-new-todo");
 const todoTitleForm = document.querySelector("#add-title");
 
 const saveEditButton = document.querySelector("#edit-modal .edit-todo");
@@ -210,8 +210,10 @@ showNewTodoFormButton.addEventListener("click", () => {
   todoTitleForm.focus();
 });
 
-cancelNewTodoButton.addEventListener("click", () => {
-  AddTodoFormController.toggleForm();
+cancelNewTodoButton.forEach((cancelButton) => {
+  cancelButton.addEventListener("click", () => {
+    AddTodoFormController.toggleForm();
+  });
 });
 
 addTodoButton.addEventListener("click", () => {

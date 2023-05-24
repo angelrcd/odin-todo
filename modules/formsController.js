@@ -9,6 +9,7 @@ const newTodoForm = document.querySelector(".new-todo-form");
 const todoTitleForm = document.querySelector("#add-title");
 const todoDescriptionForm = document.querySelector("#add-description");
 const todoPriorityForm = document.querySelector("select#priority");
+const overlay = document.querySelector(".overlay");
 
 const editModal = document.querySelector("#edit-modal");
 const editTitle = document.querySelector("#edit-modal .new-title");
@@ -33,7 +34,9 @@ export class NewProjectFormController {
 
 export class AddTodoFormController {
   static toggleForm() {
-    newTodoForm.classList.toggle("hidden");
+    newTodoForm.classList.toggle("open");
+    overlay.classList.toggle("hidden");
+    document.body.classList.toggle("overlay-open");
   }
 
   static getInputsValue() {

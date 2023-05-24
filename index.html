@@ -65,33 +65,49 @@
           </button>
         </div>
         <ul></ul>
-        <div class="new-todo-form hidden">
-          <form action="">
-            <div>
-              <label for="priority">Priority</label>
-              <select name="priority" id="priority">
-                <option value="low">low</option>
-                <option value="middle">mid</option>
-                <option value="urgent">urgent</option>
-              </select>
-            </div>
-
-            <div>
-              <label for="add-title">Title</label>
-              <input id="add-title" class="text" />
-            </div>
-            <div>
-              <label for="add-description">Description</label>
-              <input id="add-description" class="text" />
-            </div>
-          </form>
-          <div class="add-project-buttons-container">
-            <button class="add-todo-button">Add</button>
-            <button class="cancel-new-todo">Cancel</button>
-          </div>
-        </div>
       </div>
     </div>
+
+    <div class="new-todo-form">
+      <div>
+        <h4>New Todo</h4>
+        <div class="close-dialog-container cancel-new-todo">
+          <button class="close-dialog"></button>
+        </div>
+      </div>
+      <p>Optionally you can add a list of subtasks</p>
+      <form action="">
+        <div>
+          <label for="add-title">Title</label>
+          <input id="add-title" class="text" />
+        </div>
+        <div>
+          <label for="add-description">Description</label>
+          <!-- <input id="add-description" class="text" /> -->
+          <textarea
+            id="add-description"
+            class="text"
+            cols="30"
+            rows="4"
+          ></textarea>
+        </div>
+        <div>
+          <label for="priority">Priority</label>
+          <select name="priority" id="priority">
+            <option value="low">low</option>
+            <option value="middle">mid</option>
+            <option value="urgent">urgent</option>
+          </select>
+        </div>
+      </form>
+      <div class="add-todo-buttons-container">
+        <button class="add-todo-button">Add</button>
+        <button class="cancel-new-todo cancel-new-todo-button">Cancel</button>
+      </div>
+    </div>
+
+    <div class="overlay hidden cancel-new-todo"></div>
+
     <script type="module" src="/main.js"></script>
   </body>
 </html>
