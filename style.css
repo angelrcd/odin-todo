@@ -34,6 +34,7 @@ p, h1, h2, h3, h4, h5, h6 {
   --project-sidebar-current-bg-color : #aee0ff;
   --project-sidebar-hover-bg-color : #71afd6;
 
+  --color-header: #333333;
   --color-positive : #84cc16;
   --color-positive-dark : #14532d;
   --color-negative : #f87171;
@@ -50,16 +51,42 @@ p, h1, h2, h3, h4, h5, h6 {
 }
 
 header {
-  padding: 0.2rem 3rem;
+  padding: var(--projects-list-items-padding);
   display: flex;
-  gap: 1rem;
+  justify-content: space-between;
   align-items: center;
-  background: #333333;
+  background: var(--color-header);
   color: white;
 }
 
+.logo-container {
+  display: flex;
+  gap: 1rem;
+}
+
+header h1 {
+  font-size: 2rem;
+}
+
 header img{
-  height: 4rem;
+  height: 2.5rem;
+}
+
+.links-container {
+  display: flex;
+  gap: 1rem;
+  color: white;
+}
+
+.links-container a:visited, 
+.links-container a:link {
+  color: white;
+  text-decoration: none;
+}
+
+.links-container a:hover, 
+.links-container a:focus {
+  text-decoration: underline;
 }
 
 .projects-title-container {
