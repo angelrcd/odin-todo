@@ -31,7 +31,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
 :root {
   --project-sidebar-bg-color: #87cefa;
-  --project-sidebar-current-bg-color : #58ade2;
+  --project-sidebar-current-bg-color : #aee0ff;
   --project-sidebar-hover-bg-color : #71afd6;
 
   --color-positive : #84cc16;
@@ -40,6 +40,8 @@ p, h1, h2, h3, h4, h5, h6 {
   --color-negative-dark : #7f1d1d;
   --color-middle : #fde047;
   --color-middle-dark : #ca8a04;
+
+  --projects-list-items-padding: 0.8rem 1.5rem;
 }
 
 .hidden {
@@ -82,8 +84,18 @@ header img{
 #projects-list {
   background-color: var(--project-sidebar-bg-color);
   min-height: 100vh;
-  padding: 1rem;
+  border-right: 2px solid var(--project-sidebar-hover-bg-color);
+  /* padding: 1rem; */
   width: 300px;
+}
+
+#projects-list hr {
+  border-top: 1px solid var(--project-sidebar-hover-bg-color);
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+
+  margin: 0.3rem 1.5rem;
 }
 
 #projects-list ul {
@@ -92,23 +104,24 @@ header img{
 }
 
 #projects-list ul li {
-  padding: 0.2rem 1rem;
+  padding: var(--projects-list-items-padding);
   display: flex;
   justify-content: space-between;
-  border-radius: 5px;
 }
 
 .project-container {
   user-select: none;
-  margin-bottom: 0.3rem;
+  /* margin-bottom: 0.3rem; */
 }
 
 .project-container:hover:not(.current-project), .show-new-project-form:hover {
   background: var(--project-sidebar-hover-bg-color);
+  cursor: pointer;
 }
 
 #projects-list h2, #current-project h2 {
-  margin-bottom: 1rem;
+  width: 100%;
+  padding: var(--projects-list-items-padding);
 }
 
 .delete-project {
@@ -118,6 +131,11 @@ header img{
   background-position: 100% 50%;
   border: none;
   width: 1rem;
+  cursor: pointer;
+}
+
+.delete-project:hover {
+  filter: brightness(0);
 }
 
 .project-container:hover .delete-project {
@@ -139,16 +157,23 @@ header img{
 
 /* New project form */
 .show-new-project-form {
+  text-align: left;
   width: 100%;
-  padding: 0.2rem 1rem;
+  padding: var(--projects-list-items-padding);
+  cursor: pointer;
   border: none;
-  border-radius: 5px;
   background: none;
+}
+
+.new-project-form {
+  padding: var(--projects-list-items-padding);
+  padding-top: 0;
 }
 
 .new-project-form input {
   width: 100%;
   margin-bottom: 0.3rem;
+  padding: 0.3rem 0rem;
 }
 
 .add-project-buttons-container {
@@ -161,6 +186,7 @@ header img{
   padding: 0.2rem 1rem;
   border-radius: 5px;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .add-project-button {
@@ -339,6 +365,7 @@ input.complete-todo {
   #projects-list {
     width: 100%;
     min-height: fit-content;
+
   }
 
   .mobile-menu-button {
