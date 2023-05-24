@@ -42,6 +42,7 @@ p, h1, h2, h3, h4, h5, h6 {
   --color-middle-dark : #ca8a04;
 
   --projects-list-items-padding: 0.8rem 1.5rem;
+  --separation-sections: 3rem;
 }
 
 .hidden {
@@ -76,9 +77,14 @@ header img{
   background: url(/menu.svg);
 }
 
+.add-symbol {
+  margin-right: 0.5rem;
+  font-weight: 600;
+  color: #043655;
+}
+
 #app {
   display: flex;
-  gap: 1rem;
 }
 
 #projects-list {
@@ -111,7 +117,7 @@ header img{
 
 .project-container {
   user-select: none;
-  /* margin-bottom: 0.3rem; */
+
 }
 
 .project-container:hover:not(.current-project), .show-new-project-form:hover {
@@ -119,7 +125,7 @@ header img{
   cursor: pointer;
 }
 
-#projects-list h2, #current-project h2 {
+#projects-list h2 {
   width: 100%;
   padding: var(--projects-list-items-padding);
 }
@@ -164,7 +170,6 @@ header img{
 }
 
 #current-project {
-  padding: 2rem;
   flex-grow: 1;
 }
 
@@ -173,6 +178,7 @@ header img{
 }
 
 /* New project form */
+
 .show-new-project-form {
   text-align: left;
   width: 100%;
@@ -217,6 +223,7 @@ header img{
 }
 
 /* Checkbox input customization */
+
 .input-container {
   display: flex;
   align-items: center;
@@ -250,19 +257,33 @@ input.complete-todo {
   border-color: var(--color-negative-dark);
 }
 
+/* Current project info */
 
-/* New todo form */
+.current-project-info-container {
+  background: var(--project-sidebar-bg-color);
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--project-sidebar-hover-bg-color);
+}
+
+.current-project-info-container h2 {
+  padding: 0.9rem var(--separation-sections);
+}
 
 .show-new-todo-form {
-  background: url(/plus.svg);
-  background-color: #87cefa;
-  height: 40px;
-  width: 40px;
-  margin-top: 1rem;
-  font-size: 30px;
-  border-radius: 50%;
+  background: none;
   border: none;
+  border-left: 1px solid var(--project-sidebar-hover-bg-color);
+  border-right: 1px solid var(--project-sidebar-hover-bg-color);
+  padding: 0 1rem;
+  cursor: pointer;
 }
+
+.show-new-todo-form:hover {
+  background: var(--project-sidebar-hover-bg-color);
+}
+
+/* New todo form */
 
 .new-todo-form form {
   display: flex;
