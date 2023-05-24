@@ -258,12 +258,17 @@ header img{
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
-div.checkbox {
+.todo-element-container .input-container:hover {
+  color: var(--project-sidebar-hover-bg-color);
+}
+
+.checkbox {
   width: 1.2rem;
   height: 1.2rem;
-  border: 1px solid gray;
+  border: 2px solid var(--project-sidebar-hover-bg-color);
   border-radius: 50%;
   flex-shrink: 0;
 }
@@ -273,7 +278,7 @@ input.complete-todo {
 }
 
 .complete-todo:checked ~ .checkbox {
-  background: lightgray;
+  background: url(/check.svg);
 }
 
 /* Current project info */
@@ -323,12 +328,19 @@ input.complete-todo {
 /* Todo element styling */
 #current-project ul {
   list-style: none;
+  margin-top: 2rem;
+  padding: 0rem var(--separation-sections);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .todo-element-container {
   min-width: 200px;
-  border-bottom: 1px solid black;
-  padding: 0.3rem;
+  background: #fff;
+  border-radius: 15px;
+  padding: 1rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .priority {
@@ -338,6 +350,7 @@ input.complete-todo {
   text-transform: uppercase;
   /* color: white; */
   border-radius: 20px;
+  margin-left: auto;
 }
 
 .priority.low {
@@ -380,11 +393,6 @@ input.complete-todo {
 .tasks-list label{
   display: flex;
   gap: 0.5rem
-}
-
-.todo-element-container .date {
-  font-size: 0.8rem;
-  margin-left: auto;
 }
 
 .todo-element-container.complete h3 {

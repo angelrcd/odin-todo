@@ -5,8 +5,6 @@ export default function getTodoElement(todo) {
   todoElement.setAttribute("data-priority", todo.priority);
 
   todoElement.innerHTML = `
-          <p class="priority ${todo.priority}">
-          ${todo.priority} priority</p>
           <div class="title-row">
             <label class="input-container">
               <input class="complete-todo" type="checkbox" name="" />
@@ -23,7 +21,8 @@ export default function getTodoElement(todo) {
           <div class="buttons-row">
             <button title="Edit todo" class="show-edit-todo-form"></button>
             <button title="Delete todo" class ="delete-todo"></button>
-            <p class="date">${todo.getDate()}</p>
+            <p class="priority ${todo.priority}">
+          ${todo.priority} priority</p>
           </div>
   `;
   const isCompleteElement = todoElement.querySelector(" input");
