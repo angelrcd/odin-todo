@@ -1,9 +1,11 @@
 export default class TodoItem {
-  constructor(title, description, priority) {
+  constructor(title, description, priority, taskList = []) {
     this._title = title;
     this._description = description;
     this.priority = priority;
-    this.taskList = [];
+
+    const tasks = taskList.map((taskItem) => new Task(taskItem));
+    this.taskList = tasks;
     this.isComplete = false;
   }
 

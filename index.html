@@ -78,11 +78,15 @@
       <p>Optionally you can add a list of subtasks</p>
       <form action="">
         <div>
-          <label for="add-title">Title</label>
+          <label for="add-title"
+            >Title<span class="required-tag">*</span></label
+          >
           <input id="add-title" class="text" />
         </div>
         <div>
-          <label for="add-description">Description</label>
+          <label for="add-description"
+            >Description<span class="required-tag">*</span></label
+          >
           <!-- <input id="add-description" class="text" /> -->
           <textarea
             id="add-description"
@@ -92,13 +96,23 @@
           ></textarea>
         </div>
         <div>
-          <label for="priority">Priority</label>
+          <label for="priority"
+            >Priority<span class="required-tag">*</span></label
+          >
           <select name="priority" id="priority">
             <option value="low">low</option>
             <option value="middle">mid</option>
             <option value="urgent">urgent</option>
           </select>
         </div>
+        <label for="add-todo-task-list" class="form-subtasks-title"
+          >Subtasks</label
+        >
+        <div class="task-list add-todo-task-list">
+          <input placeholder="Add a subtask" type="text" />
+          <button type="button">+</button>
+        </div>
+        <ol class="add-todo-task-list-items"></ol>
       </form>
       <div class="add-todo-buttons-container">
         <button class="add-todo-button">Add</button>

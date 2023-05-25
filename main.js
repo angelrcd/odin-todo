@@ -26,6 +26,9 @@ const saveEditButton = document.querySelector("#edit-modal .edit-todo");
 const editModal = document.querySelector("#edit-modal");
 const addTaskEdit = document.querySelector(".edit-add-task");
 
+// Start event listeners for input validation
+AddTodoFormController.startValidInputsListener();
+
 // Mobile menu functionality
 const mobileMenuButton = document.querySelector(".mobile-menu-button");
 const toggleMobileMenu = () => projectListContainer.classList.toggle("closed");
@@ -219,6 +222,7 @@ cancelNewTodoButton.forEach((cancelButton) => {
 addTodoButton.addEventListener("click", () => {
   const currentProject = app.getCurrentProject();
   const inputsValue = AddTodoFormController.getInputsValue();
+  console.log(inputsValue);
   const wasTodoAdded = currentProject.addTodo(new TodoItem(...inputsValue));
   if (wasTodoAdded) {
     AddTodoFormController.clearInputs();
@@ -229,7 +233,6 @@ addTodoButton.addEventListener("click", () => {
     );
     saveLocalStorage();
   }
-  console.log(currentProject.todoList.at(-1));
 });
 
 // Event listener for checking, edit and delete todos

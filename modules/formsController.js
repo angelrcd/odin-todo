@@ -9,6 +9,11 @@ const newTodoForm = document.querySelector(".new-todo-form");
 const todoTitleForm = document.querySelector("#add-title");
 const todoDescriptionForm = document.querySelector("#add-description");
 const todoPriorityForm = document.querySelector("select#priority");
+const addTaskButton = document.querySelector(".add-todo-task-list button");
+const addTaskInput = document.querySelector(".add-todo-task-list input");
+const addTaskList = document.querySelector(".add-todo-task-list-items");
+const addTodoButton = document.querySelector(".add-todo-button");
+
 const overlay = document.querySelector(".overlay");
 
 const editModal = document.querySelector("#edit-modal");
@@ -34,6 +39,12 @@ export class NewProjectFormController {
 
 export class AddTodoFormController {
   static toggleForm() {
+    if (todoTitleForm.value === "" || todoDescriptionForm.value === "") {
+      addTodoButton.disabled = true;
+    } else {
+      addTodoButton.disabled = false;
+    }
+
     newTodoForm.classList.toggle("open");
     overlay.classList.toggle("hidden");
     document.body.classList.toggle("overlay-open");
@@ -44,6 +55,7 @@ export class AddTodoFormController {
       todoTitleForm.value,
       todoDescriptionForm.value,
       todoPriorityForm.value,
+      this.getAllTasksValues(),
     ];
   }
 
@@ -51,8 +63,45 @@ export class AddTodoFormController {
     todoTitleForm.value = "";
     todoDescriptionForm.value = "";
     todoPriorityForm.value = "low";
+    addTaskList.innerHTML = "";
+  }
+
+  // Disables button if inputs are invalid
+  static startValidInputsListener() {
+    const inputs = [todoTitleForm, todoDescriptionForm];
+    inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        if (todoTitleForm.value === "" || todoDescriptionForm.value === "") {
+          addTodoButton.disabled = true;
+        } else {
+          addTodoButton.disabled = false;
+        }
+      });
+    });
+  }
+
+  static appendTask(name) {
+    addTaskInput.value = "";
+    const li = document.createElement("li");
+    li.innerText = name;
+    addTaskList.append(li);
+  }
+
+  static getNewTaskName() {
+    const name = addTaskInput.value;
+    return name;
+  }
+
+  static getAllTasksValues() {
+    const taskItems = addTaskList.querySelectorAll("li");
+    return Array.from(taskItems).map((taskItem) => taskItem.innerText);
   }
 }
+
+addTaskButton.addEventListener("click", () => {
+  const newTaskName = AddTodoFormController.getNewTaskName();
+  AddTodoFormController.appendTask(newTaskName);
+});
 
 export class EditTodoFormController {
   static openModal(todo, index) {
