@@ -22,9 +22,10 @@ const cancelNewProjectButton = document.querySelector(".cancel-new-project");
 const cancelNewTodoButton = document.querySelectorAll(".cancel-new-todo");
 const todoTitleForm = document.querySelector("#add-title");
 
-const saveEditButton = document.querySelector("#edit-modal .edit-todo");
-const editModal = document.querySelector("#edit-modal");
-const addTaskEdit = document.querySelector(".edit-add-task");
+const saveEditButton = document.querySelector(".edit-todo-button");
+const editModal = document.querySelector(".edit-todo-form");
+const addTaskEdit = document.querySelector(".edit-task-list button");
+const cancelEditTodoButton = document.querySelectorAll(".cancel-edit-todo");
 
 // Start event listeners for input validation
 AddTodoFormController.startValidInputsListener();
@@ -209,13 +210,13 @@ projectListContainer.addEventListener("click", (e) => {
 
 // Events listeners regarding adding new todo elements
 showNewTodoFormButton.addEventListener("click", () => {
-  AddTodoFormController.toggleForm();
+  AddTodoFormController.openForm();
   todoTitleForm.focus();
 });
 
 cancelNewTodoButton.forEach((cancelButton) => {
   cancelButton.addEventListener("click", () => {
-    AddTodoFormController.toggleForm();
+    AddTodoFormController.closeModal();
   });
 });
 
@@ -226,7 +227,7 @@ addTodoButton.addEventListener("click", () => {
   const wasTodoAdded = currentProject.addTodo(new TodoItem(...inputsValue));
   if (wasTodoAdded) {
     AddTodoFormController.clearInputs();
-    AddTodoFormController.toggleForm();
+    AddTodoFormController.closeModal();
     DisplayController.updateDisplay(
       app.getProjectList(),
       app.getCurrentProject()
@@ -265,7 +266,7 @@ todoList.addEventListener("click", (e) => {
   }
   // Edit todo
   if (e.target.classList.contains("show-edit-todo-form")) {
-    EditTodoFormController.openModal(
+    EditTodoFormController.openForm(
       currentProject.todoList[todoIndex],
       todoIndex
     );
@@ -283,6 +284,12 @@ todoList.addEventListener("click", (e) => {
     );
     saveLocalStorage();
   }
+});
+
+cancelEditTodoButton.forEach((cancelButton) => {
+  cancelButton.addEventListener("click", () => {
+    EditTodoFormController.closeModal();
+  });
 });
 
 saveEditButton.addEventListener("click", () => {

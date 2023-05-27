@@ -8,7 +8,7 @@
     <title>Vite App</title>
   </head>
   <body>
-    <dialog id="edit-modal">
+    <!-- <dialog id="edit-modal">
       <p contenteditable="true" class="new-title">a</p>
       <p contenteditable="true" class="new-description">b</p>
       <div>
@@ -23,7 +23,7 @@
       <ol class="edit-todo-tasks"></ol>
       <button class="edit-add-task">Add task</button>
       <button class="edit-todo">Edit</button>
-    </dialog>
+    </dialog> -->
 
     <header>
       <div class="logo-container">
@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <div class="new-todo-form">
+    <div class="form-window new-todo-form">
       <div>
         <h4>New Todo</h4>
         <div class="close-dialog-container cancel-new-todo">
@@ -120,7 +120,59 @@
       </div>
     </div>
 
-    <div class="overlay hidden cancel-new-todo"></div>
+    <div class="form-window edit-todo-form">
+      <div>
+        <h4>Edit Todo</h4>
+        <div class="close-dialog-container cancel-edit-todo">
+          <button class="close-dialog"></button>
+        </div>
+      </div>
+      <p>Optionally you can add a list of subtasks</p>
+      <form action="">
+        <div>
+          <label for="edit-title"
+            >Title<span class="required-tag">*</span></label
+          >
+          <input id="edit-title" class="text" />
+        </div>
+        <div>
+          <label for="edit-description"
+            >Description<span class="required-tag">*</span></label
+          >
+          <!-- <input id="add-description" class="text" /> -->
+          <textarea
+            id="edit-description"
+            class="text"
+            cols="30"
+            rows="4"
+          ></textarea>
+        </div>
+        <div>
+          <label for="priority"
+            >Priority<span class="required-tag">*</span></label
+          >
+          <select name="edit-priority" id="edit-priority">
+            <option value="low">low</option>
+            <option value="middle">mid</option>
+            <option value="urgent">urgent</option>
+          </select>
+        </div>
+        <label for="edit-todo-task-list" class="form-subtasks-title"
+          >Subtasks</label
+        >
+        <div class="task-list edit-task-list">
+          <input placeholder="Add a subtask" type="text" />
+          <button type="button">+</button>
+        </div>
+        <ol class="edit-task-list-items"></ol>
+      </form>
+      <div class="edit-todo-buttons-container">
+        <button class="edit-todo-button">Add</button>
+        <button class="cancel-edit-todo cancel-edit-todo-button">Cancel</button>
+      </div>
+    </div>
+
+    <div class="overlay hidden"></div>
 
     <script type="module" src="/main.js"></script>
   </body>

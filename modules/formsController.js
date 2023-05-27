@@ -3,24 +3,31 @@ const showNewProjectFormButton = document.querySelector(
 );
 const newProjectForm = document.querySelector(".new-project-form");
 const newProjectNameInput = document.querySelector(".new-project-form input");
+const overlay = document.querySelector(".overlay");
 
-const showNewTodoFormButton = document.querySelector(".show-new-todo-form");
-const newTodoForm = document.querySelector(".new-todo-form");
-const todoTitleForm = document.querySelector("#add-title");
-const todoDescriptionForm = document.querySelector("#add-description");
-const todoPriorityForm = document.querySelector("select#priority");
+const newTodoModal = document.querySelector(".new-todo-form");
+const addTitleInput = document.querySelector("#add-title");
+const addDescriptionInput = document.querySelector("#add-description");
+const addPriorityInput = document.querySelector("select#priority");
 const addTaskButton = document.querySelector(".add-todo-task-list button");
 const addTaskInput = document.querySelector(".add-todo-task-list input");
 const addTaskList = document.querySelector(".add-todo-task-list-items");
 const addTodoButton = document.querySelector(".add-todo-button");
 
-const overlay = document.querySelector(".overlay");
+const editTodoModal = document.querySelector(".edit-todo-form");
+const editTitleInput = document.querySelector("#edit-title");
+const editDescriptionInput = document.querySelector("#edit-description");
+const editPriorityInput = document.querySelector("#edit-priority");
+const editTaskButton = document.querySelector(".edit-task-list button");
+const editTaskInput = document.querySelector(".edit-task-list input");
+const editTaskList = document.querySelector(".edit-task-list-items");
+const editTodoButton = document.querySelector(".edit-todo-button");
 
-const editModal = document.querySelector("#edit-modal");
-const editTitle = document.querySelector("#edit-modal .new-title");
-const editDescription = document.querySelector("#edit-modal .new-description");
-const editPriority = document.querySelector("#edit-modal select");
-const editTaskList = document.querySelector(".edit-todo-tasks");
+// Clicking overlay closes modals
+overlay.addEventListener("click", () => {
+  AddTodoFormController.closeModal();
+  EditTodoFormController.closeModal();
+});
 
 export class NewProjectFormController {
   static toggleForm() {
@@ -38,40 +45,46 @@ export class NewProjectFormController {
 }
 
 export class AddTodoFormController {
-  static toggleForm() {
-    if (todoTitleForm.value === "" || todoDescriptionForm.value === "") {
+  static openForm() {
+    if (addTitleInput.value === "" || addDescriptionInput.value === "") {
       addTodoButton.disabled = true;
     } else {
       addTodoButton.disabled = false;
     }
 
-    newTodoForm.classList.toggle("open");
-    overlay.classList.toggle("hidden");
-    document.body.classList.toggle("overlay-open");
+    newTodoModal.classList.add("open");
+    overlay.classList.remove("hidden");
+    document.body.classList.add("overlay-open");
+  }
+
+  static closeModal() {
+    newTodoModal.classList.remove("open");
+    overlay.classList.add("hidden");
+    document.body.classList.remove("overlay-open");
   }
 
   static getInputsValue() {
     return [
-      todoTitleForm.value,
-      todoDescriptionForm.value,
-      todoPriorityForm.value,
+      addTitleInput.value,
+      addDescriptionInput.value,
+      addPriorityInput.value,
       this.getAllTasksValues(),
     ];
   }
 
   static clearInputs() {
-    todoTitleForm.value = "";
-    todoDescriptionForm.value = "";
-    todoPriorityForm.value = "low";
+    addTitleInput.value = "";
+    addDescriptionInput.value = "";
+    addPriorityInput.value = "low";
     addTaskList.innerHTML = "";
   }
 
   // Disables button if inputs are invalid
   static startValidInputsListener() {
-    const inputs = [todoTitleForm, todoDescriptionForm];
+    const inputs = [addTitleInput, addDescriptionInput];
     inputs.forEach((input) => {
       input.addEventListener("input", () => {
-        if (todoTitleForm.value === "" || todoDescriptionForm.value === "") {
+        if (addTitleInput.value === "" || addDescriptionInput.value === "") {
           addTodoButton.disabled = true;
         } else {
           addTodoButton.disabled = false;
@@ -81,6 +94,8 @@ export class AddTodoFormController {
   }
 
   static appendTask(name) {
+    if (!name) return;
+
     addTaskInput.value = "";
     const li = document.createElement("li");
     li.innerText = name;
@@ -104,11 +119,11 @@ addTaskButton.addEventListener("click", () => {
 });
 
 export class EditTodoFormController {
-  static openModal(todo, index) {
-    editModal.setAttribute("data-index", index);
-    editTitle.textContent = todo.title;
-    editDescription.textContent = todo.description;
-    editPriority.value = todo.priority;
+  static openForm(todo, index) {
+    editTodoModal.setAttribute("data-index", index);
+    editTitleInput.textContent = todo.title;
+    editDescriptionInput.textContent = todo.description;
+    editPriorityInput.value = todo.priority;
 
     editTaskList.innerHTML = "";
     for (const task of todo.taskList) {
@@ -116,11 +131,15 @@ export class EditTodoFormController {
       taskList.innerHTML = `<p contentEditable>${task.text}</p><button class="delete-task"></button>`;
       editTaskList.appendChild(taskList);
     }
-    editModal.showModal();
+    editTodoModal.classList.add("open");
+    overlay.classList.remove("hidden");
+    document.body.classList.add("overlay-open");
   }
 
   static closeModal() {
-    editModal.close();
+    editTodoModal.classList.remove("open");
+    overlay.classList.add("hidden");
+    document.body.classList.remove("overlay-open");
   }
 
   static addTask() {
