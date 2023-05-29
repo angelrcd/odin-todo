@@ -8,37 +8,8 @@
     <title>Vite App</title>
   </head>
   <body>
-    <!-- <dialog id="edit-modal">
-      <p contenteditable="true" class="new-title">a</p>
-      <p contenteditable="true" class="new-description">b</p>
-      <div>
-        <label for="edit-priority">Priority</label>
-        <select name="priority" id="edit-priority">
-          <option value="low">low</option>
-          <option value="middle">mid</option>
-          <option value="urgent">urgent</option>
-        </select>
-      </div>
-      <h3>Tasks list</h3>
-      <ol class="edit-todo-tasks"></ol>
-      <button class="edit-add-task">Add task</button>
-      <button class="edit-todo">Edit</button>
-    </dialog> -->
-
-    <header>
-      <div class="logo-container">
-        <img src="/logo.svg" alt="logo" />
-        <h1>Todo List</h1>
-      </div>
-      <div class="links-container">
-        <a href="https://github.com/angelrcd/odin-todo">Github</a>
-        <a href="https://www.linkedin.com/in/angel-romero-cesteros/"
-          >LinkedIn</a
-        >
-      </div>
-    </header>
-    <div id="app">
-      <div id="projects-list" class="closed">
+    <main id="app">
+      <section id="projects-list" class="closed">
         <div class="projects-title-container">
           <h2>PROJECTS</h2>
           <button class="mobile-menu-button"></button>
@@ -56,8 +27,8 @@
             <button class="cancel-new-project">Cancel</button>
           </div>
         </div>
-      </div>
-      <div id="current-project">
+      </section>
+      <section id="current-project">
         <div class="current-project-info-container">
           <h2></h2>
           <button class="show-new-todo-form">
@@ -65,8 +36,13 @@
           </button>
         </div>
         <ul></ul>
-      </div>
-    </div>
+      </section>
+    </main>
+
+    <footer>
+      <a href="">Github</a>
+      <a href="">LinkedIn</a>
+    </footer>
 
     <div class="form-window new-todo-form">
       <div>
