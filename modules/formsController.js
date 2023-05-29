@@ -98,7 +98,8 @@ export class AddTodoFormController {
 
     addTaskInput.value = "";
     const li = document.createElement("li");
-    li.innerText = name;
+    li.classList.add("task-list-item");
+    li.innerHTML = `<p contentEditable>${name}</p><button class='delete-task'>Remove</button>`;
     addTaskList.append(li);
   }
 
@@ -121,14 +122,22 @@ addTaskButton.addEventListener("click", () => {
 export class EditTodoFormController {
   static openForm(todo, index) {
     editTodoModal.setAttribute("data-index", index);
-    editTitleInput.textContent = todo.title;
-    editDescriptionInput.textContent = todo.description;
+    console.log(todo.description);
+    editTitleInput.value = todo.title;
+    editDescriptionInput.value = todo.description;
     editPriorityInput.value = todo.priority;
+
+    if (editTitleInput.value === "" || editDescriptionInput.value === "") {
+      editTodoButton.disabled = true;
+    } else {
+      editTodoButton.disabled = false;
+    }
 
     editTaskList.innerHTML = "";
     for (const task of todo.taskList) {
       const taskList = document.createElement("li");
-      taskList.innerHTML = `<p contentEditable>${task.text}</p><button class="delete-task"></button>`;
+      taskList.classList.add("task-list-item");
+      taskList.innerHTML = `<p contentEditable>${task.text}</p><button class="delete-task">Remove</button>`;
       editTaskList.appendChild(taskList);
     }
     editTodoModal.classList.add("open");
@@ -142,12 +151,15 @@ export class EditTodoFormController {
     document.body.classList.remove("overlay-open");
   }
 
-  static addTask() {
+  static addTask(name) {
+    if (!name) return;
+
     const newTask = document.createElement("li");
-    newTask.innerHTML =
-      "<p contentEditable>Task</p><button class='delete-task'></button>";
+    newTask.classList.add("task-list-item");
+    newTask.innerHTML = `<p contentEditable>${name}</p><button class='delete-task'>Remove</button>`;
 
     editTaskList.appendChild(newTask);
+    editTaskInput.value = "";
   }
 
   static getNewValues() {
@@ -156,10 +168,35 @@ export class EditTodoFormController {
     );
 
     return [
-      editTitle.textContent,
-      editDescription.textContent,
-      editPriority.value,
+      editTitleInput.value,
+      editDescriptionInput.value,
+      editPriorityInput.value,
       newTaskValues,
     ];
   }
+
+  static startValidInputsListener() {
+    const inputs = [editTitleInput, editDescriptionInput];
+    inputs.forEach((input) => {
+      input.addEventListener("input", () => {
+        if (editTitleInput.value === "" || editDescriptionInput.value === "") {
+          editTodoButton.disabled = true;
+        } else {
+          editTodoButton.disabled = false;
+        }
+      });
+    });
+  }
 }
+
+editTaskButton.addEventListener("click", () => {
+  const newTaskName = editTaskInput.value;
+  EditTodoFormController.addTask(newTaskName);
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    AddTodoFormController.closeModal();
+    EditTodoFormController.closeModal();
+  }
+});

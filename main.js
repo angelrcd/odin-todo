@@ -21,14 +21,15 @@ const newProjectNameInput = document.querySelector(".new-project-form input");
 const cancelNewProjectButton = document.querySelector(".cancel-new-project");
 const cancelNewTodoButton = document.querySelectorAll(".cancel-new-todo");
 const todoTitleForm = document.querySelector("#add-title");
+const addModal = document.querySelector(".new-todo-form");
 
 const saveEditButton = document.querySelector(".edit-todo-button");
 const editModal = document.querySelector(".edit-todo-form");
-const addTaskEdit = document.querySelector(".edit-task-list button");
 const cancelEditTodoButton = document.querySelectorAll(".cancel-edit-todo");
 
 // Start event listeners for input validation
 AddTodoFormController.startValidInputsListener();
+EditTodoFormController.startValidInputsListener();
 
 // Mobile menu functionality
 const mobileMenuButton = document.querySelector(".mobile-menu-button");
@@ -295,6 +296,7 @@ cancelEditTodoButton.forEach((cancelButton) => {
 saveEditButton.addEventListener("click", () => {
   const index = editModal.getAttribute("data-index");
   const newTodoValues = EditTodoFormController.getNewValues();
+  console.log(newTodoValues);
 
   app.getCurrentProject().todoList[index].editTodo(...newTodoValues);
   app.getCurrentProject().todoList[index].replaceTasks(newTodoValues[3]);
@@ -306,9 +308,14 @@ saveEditButton.addEventListener("click", () => {
   saveLocalStorage();
 });
 
-addTaskEdit.addEventListener("click", EditTodoFormController.addTask);
-
 editModal.addEventListener("click", (e) => {
+  if (e.target.classList.contains("delete-task")) {
+    const listItem = e.target.closest("li");
+    listItem.remove();
+  }
+});
+
+addModal.addEventListener("click", (e) => {
   if (e.target.classList.contains("delete-task")) {
     const listItem = e.target.closest("li");
     listItem.remove();
