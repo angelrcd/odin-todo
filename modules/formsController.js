@@ -109,7 +109,7 @@ export class AddTodoFormController {
   }
 
   static getAllTasksValues() {
-    const taskItems = addTaskList.querySelectorAll("li");
+    const taskItems = addTaskList.querySelectorAll("li p");
     return Array.from(taskItems).map((taskItem) => taskItem.innerText);
   }
 }
@@ -163,7 +163,7 @@ export class EditTodoFormController {
   }
 
   static getNewValues() {
-    let newTaskValues = Array.from(editTaskList.querySelectorAll("li")).map(
+    let newTaskValues = Array.from(editTaskList.querySelectorAll("li p")).map(
       (taskItem) => taskItem.textContent
     );
 
