@@ -35,10 +35,10 @@ p, h1, h2, h3, h4, h5, h6 {
 
 :root {
   --project-sidebar-bg-color: #87cefa;
-  --project-sidebar-current-bg-color : #aee0ff;
-  --project-sidebar-hover-bg-color : #71afd6;
+  --project-sidebar-current-bg-color : #66bbf0;
+  --project-sidebar-hover-bg-color : #66bbf0;
 
-  --color-accent: #6c7ae4;
+  --color-accent: #33688a;
   --color-footer: #333333;
   --color-todo-section-bg: #FAF9F8;
   --color-positive : #84cc16;
@@ -208,8 +208,21 @@ footer a:focus {
 }
 
 .current-project {
-  background: var(--project-sidebar-current-bg-color);
-  border-left: 4px solid var(--color-footer);
+  position: relative;
+  background: var(--project-sidebar-current-bg-color);  
+}
+
+.current-project::before {
+  content: '';
+  position: absolute;
+  border-color: var(--color-accent);
+  border-style: solid;
+  border-width: 0.15em;
+  border-radius: 3px;
+  height: 80%;
+  top: 10%;
+  left: 5px;
+  width: 0;
 }
 
 /* New project form */
@@ -242,19 +255,24 @@ footer a:focus {
 .add-project-buttons-container button {
   width: 100%;
   padding: 0.2rem 1rem;
-  border-radius: 5px;
   font-weight: 600;
+  border-radius: 2px;
   cursor: pointer;
 }
 
+.add-project-buttons-container button:hover {
+  filter: brightness(0.9);
+}
+
 .add-project-button {
-  background: var(--color-positive);
-  border: 1px solid var(--color-positive-dark);
+  color: white;
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent);
 }
 
 .cancel-new-project {
-  background: var(--color-negative);
-  border: 1px solid var(--color-negative-dark);
+  background: var(--project-sidebar-bg-color);
+  border: 1px solid var(--color-accent);
 }
 
 /* Checkbox input customization */
@@ -352,7 +370,7 @@ input.complete-todo {
 }
 
 .close-dialog-container:hover {
-  background: var(--color-negative);
+  background: var(--color-accent);
 }
 
 .close-dialog {
