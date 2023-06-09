@@ -16,7 +16,7 @@ export default class DisplayController {
       listItem.setAttribute("data-index", index);
 
       const projectTextItem = document.createElement("span");
-      projectTextItem.textContent = `${project.projectName} (${project.todoList.length})`;
+      projectTextItem.textContent = project.projectName;
       projectTextItem.setAttribute("data-index", index);
       listItem.appendChild(projectTextItem);
 
@@ -47,10 +47,16 @@ export default class DisplayController {
   static #updateTodoList(currentProject) {
     const currentProjectTitle = document.querySelector("#current-project h2");
     const todoListElement = document.querySelector("#current-project ul");
+    const projectName = currentProject.projectName;
+    const numberOfTodos = currentProject.todoList.length;
+    const completeTodos = currentProject.todoList.reduce((acc, current) => {
+      if (current.isComplete) acc++;
+      return acc;
+    }, 0);
 
     todoListElement.innerHTML = "";
 
-    currentProjectTitle.textContent = currentProject.projectName;
+    currentProjectTitle.innerHTML = `${projectName} <span>(${numberOfTodos} To-Dos, ${completeTodos} completed)</span>`;
     const listOfTodos = currentProject.todoList;
 
     listOfTodos.forEach((todo, index) => {

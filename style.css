@@ -324,6 +324,11 @@ input.complete-todo {
   padding: 0.9rem var(--separation-sections);
 }
 
+.current-project-info-container h2 span {
+  margin-left: 0.5rem;
+  font-size: 1.2rem;
+}
+
 .show-new-todo-form {
   background: none;
   border: none;
