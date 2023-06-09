@@ -557,6 +557,11 @@ input.complete-todo {
   margin-top: 0.6rem;
 }
 
+.todo-element-container .buttons-row button:hover{
+  transform: scale(1.1);
+  filter: invert(37%) sepia(10%) saturate(3490%) hue-rotate(160deg) brightness(86%) contrast(72%);
+}
+
 .tasks-list {
   list-style: none;
   display: flex;
