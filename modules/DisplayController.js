@@ -14,7 +14,12 @@ export default class DisplayController {
       const listItem = document.createElement("li");
       listItem.classList.add("project-container");
       listItem.setAttribute("data-index", index);
-      listItem.textContent = `${project.projectName} (${project.todoList.length})`;
+
+      const projectTextItem = document.createElement("span");
+      projectTextItem.textContent = `${project.projectName} (${project.todoList.length})`;
+      projectTextItem.setAttribute("data-index", index);
+      listItem.appendChild(projectTextItem);
+
       if (project === currentProject) {
         listItem.classList.add("current-project");
       }

@@ -149,11 +149,17 @@ footer a:focus {
   padding: var(--projects-list-items-padding);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
 
 .project-container {
   user-select: none;
+}
 
+.project-container span {
+  max-width: calc(100% - 1.5rem);
+  word-break: break-word;
 }
 
 .project-container:hover:not(.current-project), .show-new-project-form:hover {
@@ -168,6 +174,7 @@ footer a:focus {
 
 .delete-project-container {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
   width: 1.5rem;
@@ -176,11 +183,7 @@ footer a:focus {
 }
 
 .delete-project-container:hover {
-  background: var(--project-sidebar-hover-bg-color);
-}
-
-.project-container:not(.current-project) .delete-project-container:hover {
-  background: var(--project-sidebar-current-bg-color);
+  background: var(--color-accent);
 }
 
 .delete-project {

@@ -198,8 +198,9 @@ projectListContainer.addEventListener("click", (e) => {
       app.getCurrentProject()
     );
     saveLocalStorage();
-  } else if (e.target.classList.contains("project-container")) {
+  } else {
     const projectIndex = +e.target.getAttribute("data-index");
+    console.log(projectIndex);
     app.setCurrentProject(projectIndex);
     toggleMobileMenu();
     DisplayController.updateDisplay(
