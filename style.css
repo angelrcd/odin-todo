@@ -53,6 +53,7 @@ p, h1, h2, h3, h4, h5, h6 {
 
   --projects-list-items-padding: 0.8rem 1.5rem;
   --separation-sections: 3rem;
+  --separation-sections-mobile: 0.8rem;
   --footer-height: calc(1rem + 18px);
 }
 
@@ -77,6 +78,7 @@ p, h1, h2, h3, h4, h5, h6 {
 .projects-title-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 footer {
@@ -114,6 +116,7 @@ footer a:focus {
 .add-symbol {
   margin-right: 0.5rem;
   font-weight: 600;
+  font-size: 2rem;
   color: #043655;
 }
 
@@ -330,12 +333,16 @@ input.complete-todo {
 }
 
 .show-new-todo-form {
+  flex-shrink: 0;
   background: none;
   border: none;
   border-left: 1px solid var(--project-sidebar-hover-bg-color);
   border-right: 1px solid var(--project-sidebar-hover-bg-color);
   padding: 0 1rem;
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
 }
 
 .show-new-todo-form:hover {
@@ -617,19 +624,32 @@ input.complete-todo {
   #projects-list {
     width: 100%;
     min-height: fit-content;
+  }
 
+  #projects-list.closed hr {
+    display: none;
   }
 
   .mobile-menu-button {
     display: block;
   }
 
+  .current-project-info-container {
+    border-left: 1px solid var(--project-sidebar-hover-bg-color);
+    border-top: 1px solid var(--project-sidebar-hover-bg-color);
+    border-radius: 2px;
+  }
+
+  .current-project-info-container h2 {
+    padding: 0.9rem var(--separation-sections-mobile);
+  }
+
   #current-project {
-    padding: 1rem;
+    padding: var(--separation-sections-mobile);
   }
 
   #current-project > ul {
-    padding-left: 20px;
+    padding: 0;
   }
 
   #projects-list h2 {

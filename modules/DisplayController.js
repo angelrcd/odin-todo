@@ -48,15 +48,10 @@ export default class DisplayController {
     const currentProjectTitle = document.querySelector("#current-project h2");
     const todoListElement = document.querySelector("#current-project ul");
     const projectName = currentProject.projectName;
-    const numberOfTodos = currentProject.todoList.length;
-    const completeTodos = currentProject.todoList.reduce((acc, current) => {
-      if (current.isComplete) acc++;
-      return acc;
-    }, 0);
 
     todoListElement.innerHTML = "";
 
-    currentProjectTitle.innerHTML = `${projectName} <span>(${numberOfTodos} To-Dos, ${completeTodos} completed)</span>`;
+    currentProjectTitle.innerHTML = projectName;
     const listOfTodos = currentProject.todoList;
 
     listOfTodos.forEach((todo, index) => {

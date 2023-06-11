@@ -198,11 +198,19 @@ projectListContainer.addEventListener("click", (e) => {
       app.getCurrentProject()
     );
     saveLocalStorage();
-  } else {
+  } else if (
+    e.target.classList.contains("project-container") ||
+    e.target.parentElement.classList.contains("project-container")
+  ) {
     const projectIndex = +e.target.getAttribute("data-index");
     console.log(projectIndex);
     app.setCurrentProject(projectIndex);
-    toggleMobileMenu();
+
+    // Close mobile menu in mobile layout
+    if (window.innerWidth < 600) {
+      toggleMobileMenu();
+    }
+
     DisplayController.updateDisplay(
       app.getProjectList(),
       app.getCurrentProject()
